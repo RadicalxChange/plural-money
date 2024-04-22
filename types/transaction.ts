@@ -7,3 +7,9 @@ export interface Transaction {
     amount: number;
     message: string;
 }
+
+export interface TransactionFormState {
+    name: string;
+    amount: string;
+    message: string;
+}
