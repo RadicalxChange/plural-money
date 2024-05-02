@@ -9,7 +9,7 @@ datasource db {
 
 model Account {
   id                                         Int           @id @default(autoincrement())
-  name                                       String?       @db.VarChar(255)
+  name                                       String        @db.VarChar(255)
   balance                                    Int
   is_member                                  Boolean       @default(false)
   is_admin                                   Boolean       @default(false)
@@ -20,7 +20,7 @@ model Account {
 model Transaction {
   id                                     Int     @id @default(autoincrement())
   amount                                 Int
-  message                                String? @db.VarChar
+  message                                String  @db.VarChar
   sender_id                              Int
   sender                                 Account @relation("transaction_sender", fields: [sender_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   recipient_id                           Int
