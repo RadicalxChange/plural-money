@@ -14,6 +14,7 @@ export default async function Header() {
                     <Link href="/" className="px-3 py-2 rounded hover:bg-gray-700">Participants</Link>
                     <Link href="/transactions" className="px-3 py-2 rounded hover:bg-gray-700">Transactions</Link>
                     <Link href="/send" className="px-3 py-2 rounded hover:bg-gray-700">Send</Link>
+                    <Link href="/admin" className="px-3 py-2 rounded hover:bg-gray-700">Admin</Link>
                 </div>
                 <div className="px-11">
                     <p className="font-semibold">{user.name}</p>
