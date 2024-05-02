@@ -1,11 +1,11 @@
-import { getAccounts } from "@/lib/accounts";
+import { getAccounts } from "@/lib/getAccounts";
 import { getUser } from "@/lib/user";
 import { Account } from "@/types/account";
 
-export default function Home() {
+export default async function Home() {
 
   const user: Account = getUser()
-  const accounts: Account[] = getAccounts()
+  const accounts: Account[] = await getAccounts()
 
   return (
     <main className="flex min-h-screen flex-col items-center border-b-2 border-white">
