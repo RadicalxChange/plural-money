@@ -5,12 +5,15 @@ import { Account } from "@/types/account";
 import { StagedTransaction, TransactionFormState } from "@/types/transaction";
 import useClickOutside from '@/lib/useClickOutside';
 import { createTransaction } from '@/lib/createTransaction';
+import { Claims } from '@auth0/nextjs-auth0';
 
+// TODO: restrict user from sending more than they have
+// TODO: make sure header balance updates after send
 export default function TransactionForm({
   user,
   accounts
 }: {
-  user: Account,
+  user: Claims,
   accounts: Account[]
 }) {
   // State hook to store form field values
@@ -65,7 +68,7 @@ export default function TransactionForm({
       const transactionData: StagedTransaction = {
         amount: +formData.amount,
         message: formData.message,
-        sender_id: user.id,
+        sender_id: user.account_id,
         recipient_id: recipientAccount.id
       }
       createTransaction(transactionData).then(createdTransaction => {

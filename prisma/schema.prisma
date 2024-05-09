@@ -10,6 +10,7 @@ datasource db {
 model Account {
   id                                         Int           @id @default(autoincrement())
   name                                       String        @db.VarChar(255)
+  email                                      String        @unique
   balance                                    Int
   is_member                                  Boolean       @default(false)
   is_admin                                   Boolean       @default(false)

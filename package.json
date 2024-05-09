@@ -12,10 +12,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^3.5.0",
     "@prisma/client": "^5.13.0",
+    "@types/auth0-js": "^9.21.5",
     "axios": "^1.6.8",
     "next": "14.2.1",
-    "next-auth": "^5.0.0-beta.16",
     "react": "^18",
     "react-dom": "^18",
     "server-only": "^0.0.1"

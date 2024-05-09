@@ -8,6 +8,7 @@ export default function AccountForm() {
   // State hook to store form field values
   const [formData, setFormData] = useState<AccountFormState>({
     name: '',
+    email: '',
     balance: '',
     isMember: true
   });
@@ -40,6 +41,7 @@ export default function AccountForm() {
     // Clear the form fields
     setFormData({
         name: '',
+        email: '',
         balance: '',
         isMember: true
     });
@@ -59,6 +61,19 @@ export default function AccountForm() {
                 className="w-full px-3 py-2 lg:px-4 lg:py-3 font-mono text-sm border rounded-xl bg-gray-200 border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit"
                 required
             />
+        </div>
+        <div>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-400">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full px-3 py-2 lg:px-4 lg:py-3 font-mono text-sm border rounded-xl bg-gray-200 border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit"
+            required
+          />
         </div>
         <div>
             <label htmlFor="balance" className="block text-sm font-medium text-gray-400">Whocoin Balance</label>
