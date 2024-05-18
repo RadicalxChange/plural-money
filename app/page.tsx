@@ -1,14 +1,13 @@
 'use client'
 
-import SignInButton from "@/components/signInButton";
 import { Claims } from "@auth0/nextjs-auth0";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import Link from "next/link";
 
 export default async function HomePage() {
 
   const session: Claims | null = await useUser();
   const user = !session || !session.user ? null : session.user
-  console.log(user)
 
   // Function to scroll to the "Learn More" section
   const scrollToLearnMore = () => {
@@ -24,7 +23,9 @@ export default async function HomePage() {
         <h1 className="text-lg mb-6">Welcome to the Whoville Whocoin Site</h1>
         <div className="space-x-4 mb-12">
           {!user ? (
-            <SignInButton />
+            <button className="px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-gray-400 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <Link href="/signIn">Sign In</Link>
+            </button>
           ) : null}
           <button onClick={scrollToLearnMore} className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-gray-400 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Learn More

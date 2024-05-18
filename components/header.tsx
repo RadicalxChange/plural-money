@@ -3,7 +3,6 @@ import { getUser } from '@/lib/getUser';
 import { Claims } from '@auth0/nextjs-auth0';
 import { getAccount } from '@/lib/getAccount';
 import { Account } from '@/types/account';
-import SignInButton from './signInButton';
 
 export default async function Header() {
     
@@ -40,7 +39,7 @@ export default async function Header() {
                     </Link>
                 ) : (
                     <div className="px-4">
-                        <SignInButton />
+                        <Link href="/signIn" className="px-3 py-2 rounded hover:bg-gray-700">Sign In</Link>
                     </div>
                 )}
             </div>
