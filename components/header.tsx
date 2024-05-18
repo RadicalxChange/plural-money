@@ -23,12 +23,12 @@ export default async function Header() {
                     ) : null}
                 </div>
                 {user ? (
-                    <div className="px-11">
+                    <Link href="/profile" className="mx-8 px-3 rounded hover:bg-gray-700">
                         <p className="font-semibold">{user.name}</p>
                         {account ? (
                             <p>Balance: {account.balance} Whocoins</p>
                         ) : null}
-                    </div>
+                    </Link>
                 ) : (
                     <div className="px-4">
                         <SignInButton />
