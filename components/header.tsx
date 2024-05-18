@@ -15,10 +15,19 @@ export default async function Header() {
             <div className="w-full mx-4 flex justify-between items-center">
                 <div className="flex">
                     <Link href="/" className="px-3 py-2 rounded hover:bg-gray-700">Home</Link>
-                    <Link href="/participants" className="px-3 py-2 rounded hover:bg-gray-700">Participants</Link>
-                    <Link href="/transactions" className="px-3 py-2 rounded hover:bg-gray-700">Transactions</Link>
-                    <Link href="/send" className="px-3 py-2 rounded hover:bg-gray-700">Send</Link>
-                    {user && user.account_is_admin ? (
+                    {account ? (
+                        <Link href="/participants" className="px-3 py-2 rounded hover:bg-gray-700">Participants</Link>
+                    ) : null}
+                    {account ? (
+                        <Link href="/transactions" className="px-3 py-2 rounded hover:bg-gray-700">Transactions</Link>
+                    ) : null}
+                    {account && account.balance !== 0 ? (
+                        <Link href="/send" className="px-3 py-2 rounded hover:bg-gray-700">Send</Link>
+                    ) : null}
+                    {account ? (
+                        <Link href="/rules" className="px-3 py-2 rounded hover:bg-gray-700">Rules</Link>
+                    ) : null}
+                    {account && account.is_admin ? (
                         <Link href="/admin" className="px-3 py-2 rounded hover:bg-gray-700">Admin</Link>
                     ) : null}
                 </div>
