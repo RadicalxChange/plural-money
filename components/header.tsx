@@ -3,6 +3,7 @@ import { getUser } from '@/lib/getUser';
 import { Claims } from '@auth0/nextjs-auth0';
 import { getAccount } from '@/lib/getAccount';
 import { Account } from '@/types/account';
+import SignInButton from './signInButton';
 
 export default async function Header() {
     
@@ -13,7 +14,8 @@ export default async function Header() {
         <header className="z-10 w-full font-mono sticky top-0 p-4 bg-black bg-opacity-100 border-b border-gray-200">
             <div className="w-full mx-4 flex justify-between items-center">
                 <div className="flex">
-                    <Link href="/" className="px-3 py-2 rounded hover:bg-gray-700">Participants</Link>
+                    <Link href="/" className="px-3 py-2 rounded hover:bg-gray-700">Home</Link>
+                    <Link href="/participants" className="px-3 py-2 rounded hover:bg-gray-700">Participants</Link>
                     <Link href="/transactions" className="px-3 py-2 rounded hover:bg-gray-700">Transactions</Link>
                     <Link href="/send" className="px-3 py-2 rounded hover:bg-gray-700">Send</Link>
                     {user && user.account_is_admin ? (
@@ -28,7 +30,9 @@ export default async function Header() {
                         ) : null}
                     </div>
                 ) : (
-                    <a href="/api/auth/login">Sign In</a>
+                    <div className="px-4">
+                        <SignInButton />
+                    </div>
                 )}
             </div>
         </header>
