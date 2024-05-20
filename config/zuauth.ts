@@ -14,7 +14,5 @@ export const config: ZuAuthArgs["config"] = [
     ],
     eventId: "21c7db2e-08e3-4234-9a6e-386a592d63c8",
     eventName: "Edge Esmeralda",
-    productId: "",
-    productName: ""
   }
 ];

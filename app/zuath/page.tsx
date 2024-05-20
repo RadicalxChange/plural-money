@@ -32,7 +32,8 @@ export default function Authenticate() {
           zupassUrl: process.env.NEXT_PUBLIC_ZUPASS_SERVER_URL as string,
           fieldsToReveal: {
             revealAttendeeEmail: true,
-            revealAttendeeName: true
+            revealAttendeeName: true,
+            revealProductId: false
           },
           watermark,
           config: config
