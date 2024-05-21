@@ -129,7 +129,6 @@ export default function TransactionForm({
                 min="1" // Minimum amount
                 step="1" // Ensure whole numbers only
                 required
-
             />
         </div>
         <div>

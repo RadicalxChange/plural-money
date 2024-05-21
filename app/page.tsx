@@ -4,9 +4,9 @@ import { Claims } from "@auth0/nextjs-auth0";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
 
-export default async function HomePage() {
+export default function HomePage() {
 
-  const session: Claims | null = await useUser();
+  const session: Claims | null = useUser();
   const user = !session || !session.user ? null : session.user
 
   // Function to scroll to the "Learn More" section

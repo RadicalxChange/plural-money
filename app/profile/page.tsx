@@ -8,7 +8,6 @@ import { Claims } from "@auth0/nextjs-auth0";
 export default async function Profile() {
     
   const user: Claims | null = await getUser()
-  console.log(user)
   const account: Account | null = user && await getAccount(user.email)
 
   return (
@@ -28,7 +27,7 @@ export default async function Profile() {
                 </div>
               ) : null}
             </div>
-            <SignOutButton />
+            <SignOutButton user={user} />
           </div>
         ) : (
           <p>You're not signed in</p>
