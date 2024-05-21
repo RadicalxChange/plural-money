@@ -26,7 +26,6 @@ export async function POST(req: NextRequest) {
       ironOptions
     );
     const pcd = await authenticate(body.pcd, session.watermark ?? "", config);
-
     session.user = pcd.claim.partialTicket;
     await session.save();
     return Response.json({
