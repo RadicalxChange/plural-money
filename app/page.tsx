@@ -1,13 +1,18 @@
 'use client'
 
+import { getUser } from "@/lib/getUser";
 import { Claims } from "@auth0/nextjs-auth0";
-import { useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
+  const [user, setUser] = useState<Claims | null>(null);
 
-  const session: Claims | null = useUser();
-  const user = !session || !session.user ? null : session.user
+  useEffect(() => {
+    (async () => {
+      setUser(await getUser())
+    })();
+  }, []);
 
   // Function to scroll to the "Learn More" section
   const scrollToLearnMore = () => {

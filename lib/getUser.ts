@@ -1,3 +1,5 @@
+'use server'
+
 import { ironOptions, SessionData } from "@/config/iron";
 import { Account } from "@/types/account";
 import { Claims, getSession, Session } from "@auth0/nextjs-auth0";
