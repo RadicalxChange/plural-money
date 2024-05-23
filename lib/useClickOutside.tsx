@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-function useClickOutside(handler: () => void) {
+export default function useClickOutside(handler: () => void) {
     const domNodeRef = useRef<HTMLFormElement | null>(null);
 
     useEffect(() => {
@@ -22,5 +22,3 @@ function useClickOutside(handler: () => void) {
 
     return domNodeRef;
 }
-
-export default useClickOutside;

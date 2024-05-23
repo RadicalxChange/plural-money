@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import "./globals.css";
 import Header from "@/components/header";
+import MobileNav from "@/components/mobileNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <link rel="icon" href="/curly-braces.svg" sizes="any" />
           <Header />
+          <MobileNav />
           {children}
         </body>
       </UserProvider>

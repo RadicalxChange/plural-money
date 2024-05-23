@@ -1,5 +1,7 @@
 import prisma from "@/db"
+import { getUser } from "@/lib/getUser";
 import { Account } from "@/types/account"
+import { Claims } from "@auth0/nextjs-auth0";
 
 export async function GET(request: Request) {
   try {
@@ -7,19 +9,21 @@ export async function GET(request: Request) {
     const url = new URL(request.url);
     const email = url.searchParams.get("email");
     const secret = url.searchParams.get("secret");
+    const user: Claims | null = await getUser()
 
-    // Validate that both `email` and `secret` fields are provided
-    if (!email || !secret) {
+    // Validate that the `email` field is provided
+    if (!email) {
       return new Response(
-        JSON.stringify({ error: "Missing 'email' or 'secret' field." }),
+        JSON.stringify({ error: "Missing 'email' field." }),
         { status: 400, headers: { "Content-Type": "application/json" } }
       );
     }
 
-    // Validate the secret
-    if (secret !== process.env.AUTH0_HOOK_SECRET) {
+    // Validate user or Auth0 hook secret
+    const userIsMember: boolean = user && user.account_is_member
+    if (!userIsMember && secret !== process.env.AUTH0_HOOK_SECRET) {
       return new Response(
-        JSON.stringify({ error: "Unauthorized: Invalid secret." }),
+        JSON.stringify({ error: "Unauthorized" }),
         { status: 403, headers: { "Content-Type": "application/json" } }
       );
     }

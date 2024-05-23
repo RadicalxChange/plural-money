@@ -17,3 +17,19 @@ export interface AccountFormState {
     balance: string;
     isMember: boolean;
 }
+
+// Type Guard for json that might be Account data
+export function isValidAccount(obj: any): obj is Account {
+
+    // Required fields with their expected types. Must be hardcoded here because Typescript types don't exist at runtime.
+    const requiredFields: [keyof Account, string][] = [
+        ['id', 'number'],
+        ['name', 'string'],
+        ['email', 'string'],
+        ['balance', 'number'],
+        ['is_member', 'boolean'],
+        ['is_admin', 'boolean']
+    ];
+
+    return obj && requiredFields.every(([field, type]) => field in obj && typeof obj[field] === type)
+}

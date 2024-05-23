@@ -1,0 +1,9 @@
+.navLink {
+    @apply block;
+    @apply w-full;
+    @apply text-left;
+    @apply px-3;
+    @apply py-2;
+    @apply rounded;
+    @apply hover:bg-gray-700;
+}
