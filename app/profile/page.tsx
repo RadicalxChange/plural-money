@@ -1,4 +1,3 @@
-import MembersOnly from "@/components/membersOnly";
 import SignOutButton from "@/components/signOutButton";
 import { getAccount } from "@/lib/getAccount";
 import { getUser } from "@/lib/getUser";
@@ -21,7 +20,7 @@ export default async function Profile() {
               <p>{user.email}</p>
               {account ? (
                 <div className="space-y-2">
-                  <p>Balance: {account.balance}</p>
+                  <p>Balance: {account.balance} ∈</p>
                   <p>Member: {user.account_is_member ? "Yes" : "No"}</p>
                   <p>Admin: {user.account_is_admin ? "Yes" : "No"}</p>
                 </div>

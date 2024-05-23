@@ -117,7 +117,7 @@ export default function TransactionForm({
             )}
         </div>
         <div>
-            <label htmlFor="amount" className="block text-sm font-medium text-gray-400">Amount of Whocoin</label>
+            <label htmlFor="amount" className="block text-sm font-medium text-gray-400">Amount of ∈dges</label>
             <input
                 type="number"
                 id="amount"

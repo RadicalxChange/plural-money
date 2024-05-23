@@ -34,7 +34,7 @@ export default async function Header() {
                     <Link href="/profile" className="mx-8 px-3 rounded hover:bg-gray-700">
                         <p className="font-semibold">{user.name}</p>
                         {account ? (
-                            <p>Balance: {account.balance} Whocoins</p>
+                            <p>Balance: {account.balance} ∈</p>
                         ) : null}
                     </Link>
                 ) : (

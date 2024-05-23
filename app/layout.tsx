@@ -7,8 +7,8 @@ import Header from "@/components/header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Whoville Whocoin Ledger",
-  description: "A ledger for Whocoin holders",
+  title: "Edge Esmeralda L∈dger",
+  description: "A ledger for ∈dge holders",
 };
 
 export default function RootLayout({
@@ -20,6 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <UserProvider>
         <body className={inter.className}>
+          <link rel="icon" href="/curly-braces.svg" sizes="any" />
           <Header />
           {children}
         </body>

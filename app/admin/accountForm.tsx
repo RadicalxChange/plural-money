@@ -76,7 +76,7 @@ export default function AccountForm() {
           />
         </div>
         <div>
-            <label htmlFor="balance" className="block text-sm font-medium text-gray-400">Whocoin Balance</label>
+            <label htmlFor="balance" className="block text-sm font-medium text-gray-400">∈dges</label>
             <input
                 type="number"
                 id="balance"

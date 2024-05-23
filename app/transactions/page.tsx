@@ -26,7 +26,7 @@ export default async function Transactions() {
             {transactions.reverse().map((transaction, index) => {
               return (
                 <li key={index} className={`px-4 py-2 my-2 flex justify-between items-center ${transaction.sender_id === user.account_id ? 'text-red-400' : ''} ${transaction.recipient_id === user.account_id ? 'text-green-400' : ''}`}>
-                    {getName(transaction.sender_id)} sent {transaction.amount} Whocoins to {getName(transaction.recipient_id)} for {transaction.message}
+                    {getName(transaction.sender_id)} sent {transaction.amount} ∈dges to {getName(transaction.recipient_id)} for {transaction.message}
                 </li>
               )
             })}
