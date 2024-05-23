@@ -4,7 +4,7 @@ import { useState, ChangeEvent, FormEvent } from 'react'
 import { AccountFormState } from "@/types/account";
 import { createAccount } from '@/lib/createAccount';
 
-export default function AccountForm() {
+export default function CreateAccountForm() {
   // State hook to store form field values
   const [formData, setFormData] = useState<AccountFormState>({
     name: '',
