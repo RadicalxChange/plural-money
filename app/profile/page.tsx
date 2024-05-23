@@ -1,4 +1,3 @@
-import MembersOnly from "@/components/membersOnly";
 import SignOutButton from "@/components/signOutButton";
 import { getAccount } from "@/lib/getAccount";
 import { getUser } from "@/lib/getUser";
@@ -8,7 +7,6 @@ import { Claims } from "@auth0/nextjs-auth0";
 export default async function Profile() {
     
   const user: Claims | null = await getUser()
-  console.log(user)
   const account: Account | null = user && await getAccount(user.email)
 
   return (
@@ -22,13 +20,13 @@ export default async function Profile() {
               <p>{user.email}</p>
               {account ? (
                 <div className="space-y-2">
-                  <p>Balance: {account.balance}</p>
+                  <p>Balance: {account.balance} ∈</p>
                   <p>Member: {user.account_is_member ? "Yes" : "No"}</p>
                   <p>Admin: {user.account_is_admin ? "Yes" : "No"}</p>
                 </div>
               ) : null}
             </div>
-            <SignOutButton />
+            <SignOutButton user={user} />
           </div>
         ) : (
           <p>You're not signed in</p>

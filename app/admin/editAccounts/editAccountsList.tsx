@@ -69,13 +69,13 @@ export default function EditAccountsList({
                                     min="1" // Minimum amount
                                     step="1" // Ensure whole numbers only
                                     />
-                                    <span className="mr-4"> Whocoins</span>
+                                    <span className="mr-4"> ∈</span>
                                     <button type="submit" className="bg-green-500 text-white px-2 py-1 rounded mr-2">Save</button>
                                     <button type="button" onClick={handleCancel} className="bg-red-500 text-white px-2 py-1 rounded">Cancel</button>
                                 </form>
                             ) : (
                             <>
-                                <span className="mr-4">{account.balance} Whocoins</span>
+                                <span className="mr-4">{account.balance} ∈</span>
                                 <button type="button" onClick={() => handleEdit(account)} className="text-white px-2 py-1 rounded">
                                     <Image src="/edit-pencil.svg" alt="edit" width="32" height="32" />
                                 </button>
