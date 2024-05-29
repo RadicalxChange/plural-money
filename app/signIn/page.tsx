@@ -66,7 +66,7 @@ export default function SignIn() {
       console.log("Beginning authentication");
       setAuthState("auth-start");
     }
-  }, [console.log, authState]);
+  }, [authState]);
 
   return (
     <main className="flex flex-col items-center justify-center border-b-2 border-white">

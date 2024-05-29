@@ -29,7 +29,7 @@ export default async function Profile() {
             <SignOutButton user={user} />
           </div>
         ) : (
-          <p>You're not signed in</p>
+          <p>You are not signed in</p>
         )}
       </div>
     </main>
