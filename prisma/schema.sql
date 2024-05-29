@@ -1,6 +1,8 @@
 CREATE TABLE "public"."Account" (
     id SERIAL PRIMARY KEY NOT NULL,
-    name VARCHAR(255),
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    balance INTEGER NOT NULL,
     is_member BOOLEAN NOT NULL DEFAULT FALSE,
     is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
@@ -8,9 +10,9 @@ CREATE TABLE "public"."Account" (
 CREATE TABLE "public"."Transaction" (
     id SERIAL PRIMARY KEY NOT NULL,
     amount INTEGER NOT NULL,
-    message VARCHAR,
+    message VARCHAR NOT NULL,
     sender INTEGER NOT NULL,
     recipient INTEGER NOT NULL,
-    FOREIGN KEY ("sender") REFERENCES "public"."Account"(id),
-    FOREIGN KEY ("recipient") REFERENCES "public"."Account"(id)
+    FOREIGN KEY ("sender") REFERENCES "public"."Account"(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ("recipient") REFERENCES "public"."Account"(id) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
