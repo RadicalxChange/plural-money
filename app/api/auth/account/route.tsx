@@ -2,13 +2,14 @@ import prisma from "@/db"
 import { getUser } from "@/lib/getUser";
 import { Account } from "@/types/account"
 import { Claims } from "@auth0/nextjs-auth0";
+import { NextRequest } from "next/server";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
+  // Extract the query parameters from the request URL
+  const searchParams = request.nextUrl.searchParams
   try {
-    // Extract the query parameters from the request URL
-    const url = new URL(request.url);
-    const email = url.searchParams.get("email");
-    const secret = url.searchParams.get("secret");
+    const email = searchParams.get("email");
+    const secret = searchParams.get("secret");
     const user: Claims | null = await getUser()
 
     // Validate that the `email` field is provided
