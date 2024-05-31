@@ -28,6 +28,9 @@ export async function getUser(): Promise<Claims | null> {
         name: ironSession.user.attendeeName,
         email: ironSession.user.attendeeEmail
       }
+      // Look for corresponding account and update the session with account details.
+      // This is not necessary for Auth0 sessions, because this logic is handled by
+      // a serverless function on our Auth0 tenant.
       const account: Account | null = await getAccount(zupassUser.email)
       if (account) {
         zupassUser.account_id = account.id
