@@ -1,64 +1,31 @@
-"use client"
-
-import { getUser } from "@/lib/getUser";
-import toggleMobileNav from "@/lib/toggleMobileNav";
-import { Account, isValidAccount } from "@/types/account";
+import { Account } from "@/types/account";
+import MobileNavButton from "./mobileNavButton";
 import { Claims } from "@auth0/nextjs-auth0";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import styles from "@/styles/mobileNav.module.css"
+import { getUser } from "@/lib/getUser";
+import { getAccount } from "@/lib/getAccount";
 
-export default function MobileNav() {
-  const [account, setAccount] = useState<Account | null>(null);
-
-  useEffect(() => {
-    (async () => {
-      const loggedInUser: Claims | null = await getUser()
-      if (loggedInUser) {
-          const res = await fetch('/api/auth/account?' + new URLSearchParams({
-              email: loggedInUser.email,
-          }))
-          if (res.ok) {
-              const data: any = await res.json()
-              if (isValidAccount(data.account)) {
-                  setAccount(data.account)
-              }
-          } else {
-              throw new Error('Failed to fetch data')
-          }
-      }
-    })();
-  }, []);
+export default async function MobileNav() {
+    
+  const user: Claims | null = await getUser()
+  const account: Account | null = user && await getAccount(user.email)
 
   return (
     <div id="mobile-nav" className="lg:hidden hidden z-10 fixed w-full p-4 min-h-screen-minus-header bg-black">
-      <button onClick={toggleMobileNav} className="w-full">
-        <Link href="/" className={styles.navLink}>Home</Link>
-      </button>
+      <MobileNavButton text="Home" href="/" />
       {account ? (
-        <button onClick={toggleMobileNav} className="w-full">
-          <Link href="/participants" className={styles.navLink}>Participants</Link>
-        </button>
+        <MobileNavButton text="Participants" href="/participants" />
       ) : null}
       {account ? (
-        <button onClick={toggleMobileNav} className="w-full">
-          <Link href="/transactions" className={styles.navLink}>Transactions</Link>
-        </button>
+        <MobileNavButton text="Transactions" href="/transactions" />
       ) : null}
       {account && account.balance !== 0 ? (
-        <button onClick={toggleMobileNav} className="w-full">
-          <Link href="/send" className={styles.navLink}>Send</Link>
-        </button>
+        <MobileNavButton text="Send" href="/send" />
       ) : null}
       {account ? (
-        <button onClick={toggleMobileNav} className="w-full">
-          <Link href="/rules" className={styles.navLink}>Rules</Link>
-        </button>
+        <MobileNavButton text="Rules" href="/rules" />
       ) : null}
       {account && account.is_admin ? (
-        <button onClick={toggleMobileNav} className="w-full">
-          <Link href="/admin" className={styles.navLink}>Admin</Link>
-        </button>
+        <MobileNavButton text="Admin" href="/admin" />
       ) : null}
     </div>
   );
