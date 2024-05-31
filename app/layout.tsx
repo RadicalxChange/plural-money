@@ -21,7 +21,6 @@ export default function RootLayout({
     <html lang="en">
       <UserProvider>
         <body className={inter.className}>
-          <link rel="icon" href="/curly-braces.svg" sizes="any" />
           <Header />
           <MobileNav />
           {children}
