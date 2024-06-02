@@ -1,11 +1,12 @@
 'use client'
 
 import { useState, ChangeEvent, FormEvent } from 'react'
-import { Account } from "@/types/account";
+import { Account, isValidAccount } from "@/types/account";
 import { StagedTransaction, TransactionFormState } from "@/types/transaction";
 import useClickOutside from '@/lib/useClickOutside';
 import { createTransaction } from '@/lib/createTransaction';
 import { Claims } from '@auth0/nextjs-auth0';
+import { IBalanceContext, useBalanceContext } from '@/context/balanceContext';
 
 // TODO: restrict user from sending more than they have
 // TODO: make sure header balance updates after send
@@ -23,6 +24,7 @@ export default function TransactionForm({
     message: ''
   });
   const [suggestions, setSuggestions] = useState<Account[]>([]);
+  const balanceContext: IBalanceContext | null = useBalanceContext();
 
   // Handler for changes in form inputs
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -72,7 +74,22 @@ export default function TransactionForm({
         recipient_id: recipientAccount.id
       }
       createTransaction(transactionData).then(createdTransaction => {
-        // Handle the created account, e.g., update state, log, etc.
+        // Update credit balance in header using BalanceProvider
+        if (balanceContext) {
+          fetch('/api/auth/account?' + new URLSearchParams({
+            email: user.email,
+          })).then(res => {
+            if (res.ok) {
+                res.json().then(data =>{
+                  if (isValidAccount(data.account)) {
+                    balanceContext.setBalance(data.account.balance)
+                  }
+                })
+            } else {
+                throw new Error('Failed to fetch data')
+            }
+          })
+        }
         console.log(createdTransaction);
       }).catch(error => {
         // Handle potential errors

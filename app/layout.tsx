@@ -4,6 +4,7 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 import "./globals.css";
 import Header from "@/components/header";
 import MobileNav from "@/components/mobileNav";
+import { BalanceProvider } from "@/context/balanceContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,11 +28,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <UserProvider>
-        <body className={inter.className}>
-          <Header />
-          <MobileNav />
-          {children}
-        </body>
+        <BalanceProvider>
+          <body className={inter.className}>
+            <Header />
+            <MobileNav />
+            {children}
+          </body>
+        </BalanceProvider>
       </UserProvider>
     </html>
   );
