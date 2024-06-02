@@ -644,10 +644,10 @@
     buffer "^6.0.3"
     libsodium-wrappers-sumo "^0.7.11"
 
-"@pcd/passport-interface@^0.11.0":
-  version "0.11.0"
-  resolved "https://registry.npmjs.org/@pcd/passport-interface/-/passport-interface-0.11.0.tgz"
-  integrity sha512-eMOWXpDfBRti7lL9whcpsM8eIEiMqFWtXDjuVYOn5PcEaqCxt3/RpRNcJtRTI4+P7EmxU6i+7B/jaes6ndBJKQ==
+"@pcd/passport-interface@^0.11.1":
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/@pcd/passport-interface/-/passport-interface-0.11.1.tgz#639fe0d1e85cf44154b24c1f30d99f6c068d922d"
+  integrity sha512-JzQ4VTD6wI8oDNlT8gvv9Gr92jLqHtesZCYbhGU/TpMTLREnTYV6ZX7e+PEyL33b2aCsGOCHDiii/gGka3yuJg==
   dependencies:
     "@pcd/eddsa-frog-pcd" "0.3.0"
     "@pcd/eddsa-pcd" "^0.6.0"
@@ -757,14 +757,14 @@
     snarkjs "^0.7.4"
     uuid "^9.0.0"
 
-"@pcd/zuauth@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.npmjs.org/@pcd/zuauth/-/zuauth-1.3.0.tgz"
-  integrity sha512-c3dMfH5K7zOkVWV3uae997+MxWOQq0UNgIYbWE6r12lZjsINN+lUoOlYWHm3RTcb7rsjUmAy6iutOKjdrOmK1Q==
+"@pcd/zuauth@^1.3.4":
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/@pcd/zuauth/-/zuauth-1.3.4.tgz#db3863bde64fb8ad808e7b925254cc8b6af65f46"
+  integrity sha512-EZ5y808PLjlJ208D/BXPM1HZtGM7P7gkE6jJ+yz9gmGp++Vo9oYB5+o00aEyOeOlkuGEByvvQXct/6i2lZXiZw==
   dependencies:
     "@pcd/eddsa-pcd" "^0.6.0"
     "@pcd/eddsa-ticket-pcd" "^0.6.0"
-    "@pcd/passport-interface" "^0.11.0"
+    "@pcd/passport-interface" "^0.11.1"
     "@pcd/pcd-types" "^0.11.0"
     "@pcd/semaphore-identity-pcd" "^0.11.0"
     "@pcd/zk-eddsa-event-ticket-pcd" "^0.6.0"
