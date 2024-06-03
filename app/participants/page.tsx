@@ -18,7 +18,7 @@ export default async function Participants() {
             {accounts.map((account, index) => {
               return (
                 <li key={index} className={`px-4 py-2 my-2 flex justify-between items-center ${account.id === user.account_id ? 'text-blue-400' : ''}`}>
-                    {account.name} <span className="font-bold">{account.balance} ∈</span>
+                    {account.name} <span className="font-bold">{account.balance + " " + (account.is_member ? "∈" : "∉")}</span>
                 </li>
               )
             })}
