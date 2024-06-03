@@ -5,6 +5,7 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./mdx-components.tsx",
   ],
   theme: {
     screens: {
@@ -24,7 +25,7 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       spacing: {
-        "screen-minus-header": "calc(100vh - 48px)",
+        "screen-minus-header": "calc(100vh - 78px)",
       }
     },
   },
