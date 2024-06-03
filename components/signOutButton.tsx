@@ -1,6 +1,6 @@
 "use client"
 
-import { redirectHome } from "@/lib/redirectHome";
+import { redirectHandler } from "@/lib/redirectHandler";
 import { Claims } from "@auth0/nextjs-auth0";
 
 export default function SignOutButton({
@@ -17,7 +17,7 @@ export default function SignOutButton({
             headers: { "Content-Type": "application/json" }
         }).then(logoutResult => {
             if (logoutResult.ok) {
-                redirectHome()
+                redirectHandler('/')
             } else {
                 // Handle response errors
                 console.error("Logout failed with status:", logoutResult.status);

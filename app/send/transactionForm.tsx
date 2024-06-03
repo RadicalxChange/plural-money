@@ -7,6 +7,7 @@ import useClickOutside from '@/lib/useClickOutside';
 import { createTransaction } from '@/lib/createTransaction';
 import { Claims } from '@auth0/nextjs-auth0';
 import { IBalanceContext, useBalanceContext } from '@/context/balanceContext';
+import { redirectHandler } from '@/lib/redirectHandler';
 
 // TODO: restrict user from sending more than they have
 // TODO: make sure header balance updates after send
@@ -91,6 +92,7 @@ export default function TransactionForm({
           })
         }
         console.log(createdTransaction);
+        redirectHandler('/transactions')
       }).catch(error => {
         // Handle potential errors
         console.error("Error creating account:", error);
@@ -149,11 +151,11 @@ export default function TransactionForm({
             />
         </div>
         <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-400">Message</label>
+            <label htmlFor="message" className="block text-sm font-medium text-gray-400">What's it for?</label>
             <textarea
                 id="message"
                 name="message"
-                placeholder="Ex: For a toadstool lamp"
+                placeholder="Ex: maintaining the community garden"
                 value={formData.message}
                 onChange={handleChange}
                 className="w-full px-3 py-2 lg:px-4 lg:py-3 font-mono text-sm border rounded-xl bg-gray-200 border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit"
@@ -166,7 +168,7 @@ export default function TransactionForm({
                 type="submit"
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-gray-400 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-                Create Transaction
+                Send
             </button>
         </div>
     </form>

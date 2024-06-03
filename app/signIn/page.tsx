@@ -1,7 +1,7 @@
 "use client";
 
 import { config } from "@/config/zuauth";
-import { redirectHome } from "@/lib/redirectHome";
+import { redirectHandler } from "@/lib/redirectHandler";
 import { zuAuthPopup } from "@pcd/zuauth/client";
 import { useCallback, useEffect, useState } from "react";
 
@@ -46,7 +46,7 @@ export default function SignIn() {
 
           console.log("Authenticated successfully");
           setAuthState("authenticated");
-          redirectHome();
+          redirectHandler('/');
         } else if (result.type === "popupBlocked") {
           console.log("The popup was blocked by your browser");
           setAuthState("error");
