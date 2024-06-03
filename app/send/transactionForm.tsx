@@ -9,8 +9,6 @@ import { Claims } from '@auth0/nextjs-auth0';
 import { IBalanceContext, useBalanceContext } from '@/context/balanceContext';
 import { redirectHandler } from '@/lib/redirectHandler';
 
-// TODO: restrict user from sending more than they have
-// TODO: make sure header balance updates after send
 export default function TransactionForm({
   user,
   accounts
@@ -27,9 +25,17 @@ export default function TransactionForm({
   const [suggestions, setSuggestions] = useState<Account[]>([]);
   const balanceContext: IBalanceContext | null = useBalanceContext();
 
+  const senderAccount: Account | undefined = accounts.find((account) => account.id === user.account_id)
+
   // Handler for changes in form inputs
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = event.target;
+    var { name, value } = event.target;
+
+    // prevent user from entering number less than 1 or greater than their balance
+    if (name === "amount") {
+      value = value ? Math.max(1, Math.min(senderAccount ? senderAccount.balance : Infinity, Number(event.target.value))).toString() : value;
+    }
+
     setFormData(prevFormData => ({
         ...prevFormData,
         [name]: value
@@ -59,12 +65,7 @@ export default function TransactionForm({
     // Create a new transaction
     console.log("Creating a new transaction:", formData);
 
-    const getAccount = (name: string) => {
-      const thisAccount: Account | undefined = accounts.find((account) => account.name === name)
-      return thisAccount
-    };
-
-    const recipientAccount: Account | undefined = getAccount(formData.name)
+    const recipientAccount: Account | undefined = accounts.find((account) => account.name === formData.name)
 
     // Logic to create a new transaction if account already exists. Sending currency to nonexistent account not yet supported.
     if (recipientAccount) {
@@ -145,7 +146,6 @@ export default function TransactionForm({
                 value={formData.amount}
                 onChange={handleChange}
                 className="w-full px-3 py-2 lg:px-4 lg:py-3 font-mono text-sm border rounded-xl bg-gray-200 border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit"
-                min="1" // Minimum amount
                 step="1" // Ensure whole numbers only
                 required
             />
