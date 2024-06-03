@@ -151,7 +151,7 @@ export default function TransactionForm({
             />
         </div>
         <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-400">What's it for?</label>
+            <label htmlFor="message" className="block text-sm font-medium text-gray-400">What&apos;s it for?</label>
             <textarea
                 id="message"
                 name="message"
