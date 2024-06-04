@@ -22,7 +22,9 @@ export default async function Profile() {
                 <div className="space-y-2">
                   <p className="px-4 py-1 my-1 flex justify-between items-center">Balance: {account.balance} ∈</p>
                   <p className="px-4 py-1 my-1 flex justify-between items-center">Member: {user.account_is_member ? "Yes" : "No"}</p>
-                  <p className="px-4 py-1 my-1 flex justify-between items-center">Admin: {user.account_is_admin ? "Yes" : "No"}</p>
+                  {user.account_is_admin ? (
+                    <p className="px-4 py-1 my-1 flex justify-between items-center">Admin: {user.account_is_admin ? "Yes" : "No"}</p>
+                  ) : null}
                 </div>
               ) : null}
             </div>

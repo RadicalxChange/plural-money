@@ -19,7 +19,7 @@ export default async function Send() {
     <main className="flex min-h-screen flex-col items-center border-b-2 border-white">
       <div className="w-full px-4 pb-4 lg:px-24 pt-12">
         <h1 className="text-left text-lg mb-12">Send ∈dges</h1>
-        {user && user.account_is_member ? (
+        {user && user.account_id ? (
           <TransactionForm user={user} accounts={accounts} />
         ) : (
           <MembersOnly />

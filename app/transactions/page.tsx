@@ -10,7 +10,12 @@ export default async function Transactions() {
     
   const user: Claims | null = await getUser()
   const accounts: Account[] = await getAccounts()
-  const transactions: Transaction[] = await getTransactions()
+  var transactions: Transaction[] = await getTransactions()
+
+  // if user is not a member, they can only see their own transactions
+  if (user && !user.account_is_member) {
+    transactions = transactions.filter(transaction => transaction.sender_id === user.account_id || transaction.recipient_id === user.account_id)
+  }
 
   const getName = (thisId: number) => {
     const thisAccount: Account | undefined = accounts.find((account) => account.id === thisId)
@@ -21,7 +26,7 @@ export default async function Transactions() {
     <main className="flex min-h-screen flex-col items-center border-b-2 border-white">
       <div className="w-full px-4 pb-4 lg:px-24 pt-12">
         <h1 className="text-left text-lg mb-12">Transactions</h1>
-        {user && user.account_is_member ? (
+        {user ? (
           <ul className="w-full max-w-5xl font-mono lg:text-sm text-xs border-b border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit rounded-xl border bg-gray-200 lg:p-4">
             {transactions.reverse().map((transaction, index) => {
               return (
@@ -31,9 +36,7 @@ export default async function Transactions() {
               )
             })}
           </ul>
-        ) : (
-          <MembersOnly />
-        )}
+        ) : null}
       </div>
     </main>
   );

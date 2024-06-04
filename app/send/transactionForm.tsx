@@ -74,7 +74,11 @@ export default function TransactionForm({
     setNameOrEmail(event.target.value)
     
     // filter suggested recipient accounts based on user input
-    setSuggestions(accounts.filter(account => account.name.toLowerCase().includes(event.target.value.toLowerCase())));
+    if (user.account_is_member) {
+      setSuggestions(accounts.filter(account => account.name.toLowerCase().includes(event.target.value.toLowerCase())));
+    } else {
+      setSuggestions(accounts.filter(account => account.is_member && account.name.toLowerCase().includes(event.target.value.toLowerCase())));
+    }
   };
 
   // Handler for user selecting a suggested recipient name
@@ -88,7 +92,10 @@ export default function TransactionForm({
   const handleNext = () => {
     const recipientAccount: Account | undefined = accounts.find((account) => account.name === nameOrEmail || account.email === nameOrEmail)
 
-    if (recipientAccount) {
+    // non-members can only send to members
+    if (!user.account_is_member && !recipientAccount?.is_member) {
+      throw new Error("Please enter the name or email address of a registered community member.")
+    } else if (recipientAccount) {
       setRecipient(recipientAccount);
       setFormData(prevFormData => ({
           ...prevFormData,
@@ -97,7 +104,7 @@ export default function TransactionForm({
           isTaxable: !recipientAccount.is_member
       }));
       setNameOrEmail(recipientAccount.name)
-    } else {
+   } else {
       const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (regex.test(nameOrEmail)) {
         setRecipient(nameOrEmail)
@@ -107,7 +114,7 @@ export default function TransactionForm({
             isTaxable: true
         }));
       } else {
-        throw new Error("Please enter the name of a registered participant or a valid email address")
+        throw new Error("Please enter the name of a registered community member or a valid email address")
       }
     }
   };
@@ -251,7 +258,7 @@ export default function TransactionForm({
                   required
               ></textarea>
           </div>
-          {recipient && typeof recipient === 'object' && recipient.is_member ? (
+          {recipient && typeof recipient === 'object' && recipient.is_member && senderAccount?.is_member ? (
             <div>
                 <label htmlFor="isTaxable" className="block text-sm font-medium text-gray-400">Is this payment for a non-perishable good or work on an unlisted private / personally-owned project?</label>
                 <input

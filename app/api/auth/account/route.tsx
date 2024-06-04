@@ -21,8 +21,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Validate user or Auth0 hook secret
-    const userIsMember: boolean = user && user.account_is_member
-    if (!userIsMember && secret !== process.env.AUTH0_HOOK_SECRET) {
+    if (!user && secret !== process.env.AUTH0_HOOK_SECRET) {
       return new Response(
         JSON.stringify({ error: "Unauthorized" }),
         { status: 403, headers: { "Content-Type": "application/json" } }
