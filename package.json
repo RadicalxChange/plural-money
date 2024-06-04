@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postinstall": "prisma generate",
+    "postinstall": "prisma generate && prisma migrate deploy",
     "start": "next start",
     "lint": "next lint"
   },
@@ -24,6 +24,7 @@
     "axios": "^1.6.8",
     "iron-session": "^8.0.1",
     "next": "14.2.1",
+    "prisma": "^5.13.0",
     "react": "^18",
     "react-dom": "^18",
     "server-only": "^0.0.1"
@@ -35,7 +36,6 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.1",
     "postcss": "^8",
-    "prisma": "^5.13.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

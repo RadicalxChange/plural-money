@@ -36,7 +36,7 @@ export default function TransactionForm({
 
     // prevent user from entering number less than 1 or greater than their balance
     if (name === "amount") {
-      value = value ? Math.max(1, Math.min(senderAccount ? senderAccount.balance : Infinity, Number(event.target.value))).toString() : value;
+      value = value ? Math.max(1, Math.min(senderAccount ? Math.floor(senderAccount.balance / 2) : Infinity, Number(event.target.value))).toString() : value;
     }
 
     setFormData(prevFormData => ({
@@ -235,6 +235,12 @@ export default function TransactionForm({
                   required
               ></textarea>
           </div>
+          {recipient && typeof recipient === 'string' ? (
+            <>
+            <p className="font-mono text-sm">Exit Tax: {formData.amount ? formData.amount + " ∈" : "100%"}</p>
+            {formData.amount ? (<p className="font-mono text-sm">A total of {+formData.amount * 2} ∈ will be debited from your account.</p>) : null}
+            </>
+          ) : null}
           <div>
               <button
                   type="submit"

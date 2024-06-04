@@ -7,6 +7,7 @@ export interface Account {
     balance: number;
     is_member: boolean;
     is_admin: boolean;
+    is_bank: boolean;
     transactions_sent?: Transaction[];
     transactions_received?: Transaction[];
 }

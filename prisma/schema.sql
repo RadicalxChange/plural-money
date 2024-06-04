@@ -4,7 +4,8 @@ CREATE TABLE "public"."Account" (
     email VARCHAR(255) UNIQUE NOT NULL,
     balance INTEGER NOT NULL,
     is_member BOOLEAN NOT NULL DEFAULT FALSE,
-    is_admin BOOLEAN NOT NULL DEFAULT FALSE
+    is_admin BOOLEAN NOT NULL DEFAULT FALSE,
+    is_bank BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE "public"."Transaction" (
