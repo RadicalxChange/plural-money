@@ -23,6 +23,7 @@ model Transaction {
   id                                     Int     @id @default(autoincrement())
   amount                                 Int
   message                                String  @db.VarChar
+  is_taxable                             Boolean @default(false)
   sender_id                              Int
   sender                                 Account @relation("transaction_sender", fields: [sender_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   recipient_id                           Int

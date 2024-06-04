@@ -19,15 +19,6 @@ export async function createTransaction(data: StagedTransaction): Promise<Transa
         }
       },
     });
-    // ...and subtract amount from the sender balance
-    const updatedSender: Account = await prisma.account.update({
-      where: { id: data.sender_id },
-      data: {
-        balance: {
-          decrement: +data.amount
-        }
-      },
-    });
     recipientId = data.recipient_id
   } else {
     // if recipient account does not exist, create new non-member account
@@ -40,7 +31,11 @@ export async function createTransaction(data: StagedTransaction): Promise<Transa
         is_admin: false,
       }
     })
-    // ...deposit the exit tax amount into the bank
+    recipientId = createdAccount.id
+  }
+
+  if (data.is_taxable) {
+    // Deposit any tax into the bank
     const bank: Account | null = await prisma.account.findFirst({
       where: {
         is_bank: true,
@@ -56,24 +51,26 @@ export async function createTransaction(data: StagedTransaction): Promise<Transa
         },
       });
     }
-    // ...and subtract amount + tax from the sender balance
-    const updatedSender: Account = await prisma.account.update({
-      where: { id: data.sender_id },
-      data: {
-        balance: {
-          decrement: +data.amount * 2
-        }
-      },
-    });
-    recipientId = createdAccount.id
   }
 
+  // Subtract amount, plus any tax, from the sender balance
+  const updatedSender: Account = await prisma.account.update({
+    where: { id: data.sender_id },
+    data: {
+      balance: {
+        decrement: +data.amount * (data.is_taxable ? 2 : 1)
+      }
+    },
+  });
+
+  // Record the transaction
   const createdTransaction: Transaction = await prisma.transaction.create({
     data: {
       amount: +data.amount,
       message: data.message,
       sender_id: data.sender_id,
-      recipient_id: recipientId
+      recipient_id: recipientId,
+      is_taxable: data.is_taxable
     }
   })
 

@@ -21,7 +21,8 @@ export default function TransactionForm({
     name: '',
     email: '',
     amount: '',
-    message: ''
+    message: '',
+    isTaxable: false
   });
   const [suggestions, setSuggestions] = useState<Account[]>([]);
   const [nameOrEmail, setNameOrEmail] = useState<string>('');
@@ -32,16 +33,26 @@ export default function TransactionForm({
 
   // Handler for changes in form inputs
   const handleChangeForm = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    var { name, value } = event.target;
+    const target = event.target;
+    var value = target.type === 'checkbox' ? (target as HTMLInputElement).checked : target.value;
+    const name = target.name;
 
     // prevent user from entering number less than 1 or greater than their balance
     if (name === "amount") {
-      value = value ? Math.max(1, Math.min(senderAccount ? Math.floor(senderAccount.balance / 2) : Infinity, Number(event.target.value))).toString() : value;
+      value = value ? Math.max(1, Math.min(senderAccount ? Math.floor(senderAccount.balance / (formData.isTaxable ? 2 : 1)) : Infinity, Number(value))).toString() : value;
+    }
+    
+    // when user toggles isTaxable, update amount to ensure they aren't trying to send more than they have
+    if (name === "isTaxable") {
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        amount: prevFormData.amount ? Math.max(1, Math.min(senderAccount ? Math.floor(senderAccount.balance / (value ? 2 : 1)) : Infinity, Number(prevFormData.amount))).toString() : prevFormData.amount,
+      }))
     }
 
     setFormData(prevFormData => ({
         ...prevFormData,
-        [name]: value
+        [name]: value,
     }));
   };
 
@@ -56,7 +67,8 @@ export default function TransactionForm({
         name: '',
         email: '',
         amount: '',
-        message: ''
+        message: '',
+        isTaxable: false
     });
 
     setNameOrEmail(event.target.value)
@@ -81,7 +93,8 @@ export default function TransactionForm({
       setFormData(prevFormData => ({
           ...prevFormData,
           name: recipientAccount.name,
-          email: recipientAccount.email
+          email: recipientAccount.email,
+          isTaxable: !recipientAccount.is_member
       }));
       setNameOrEmail(recipientAccount.name)
     } else {
@@ -90,7 +103,8 @@ export default function TransactionForm({
         setRecipient(nameOrEmail)
         setFormData(prevFormData => ({
             ...prevFormData,
-            email: nameOrEmail
+            email: nameOrEmail,
+            isTaxable: true
         }));
       } else {
         throw new Error("Please enter the name of a registered participant or a valid email address")
@@ -114,7 +128,8 @@ export default function TransactionForm({
       sender_id: user.account_id,
       recipient_id: recipient && typeof recipient === 'object' ? recipient.id : null,
       recipient_email: formData.email,
-      recipient_name: formData.name
+      recipient_name: formData.name,
+      is_taxable: formData.isTaxable
     }
     console.log("Creating a new transaction:", transactionData);
 
@@ -149,7 +164,8 @@ export default function TransactionForm({
         name: '',
         email: '',
         amount: '',
-        message: ''
+        message: '',
+        isTaxable: false
     });
   };
 
@@ -235,7 +251,20 @@ export default function TransactionForm({
                   required
               ></textarea>
           </div>
-          {recipient && typeof recipient === 'string' ? (
+          {recipient && typeof recipient === 'object' && recipient.is_member ? (
+            <div>
+                <label htmlFor="isTaxable" className="block text-sm font-medium text-gray-400">Is this payment for a non-perishable good or work on an unlisted private / personally-owned project?</label>
+                <input
+                    type="checkbox"
+                    id="isTaxable"
+                    name="isTaxable"
+                    checked={formData.isTaxable}
+                    onChange={handleChangeForm}
+                    className="mt-1"
+                />
+            </div>
+          ) : null}
+          {formData.isTaxable ? (
             <>
             <p className="font-mono text-sm">Exit Tax: {formData.amount ? formData.amount + " ∈" : "100%"}</p>
             {formData.amount ? (<p className="font-mono text-sm">A total of {+formData.amount * 2} ∈ will be debited from your account.</p>) : null}

@@ -4,6 +4,7 @@ export interface Transaction {
     message: string;
     sender_id: number;
     recipient_id: number;
+    is_taxable: boolean;
 }
 
 export interface TransactionFormState {
@@ -11,6 +12,7 @@ export interface TransactionFormState {
     email: string;
     amount: string;
     message: string;
+    isTaxable: boolean;
 }
 
 export interface StagedTransaction {
@@ -20,4 +22,5 @@ export interface StagedTransaction {
     recipient_id: number | null;
     recipient_email: string;
     recipient_name: string;
+    is_taxable: boolean;
 }

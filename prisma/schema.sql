@@ -14,6 +14,7 @@ CREATE TABLE "public"."Transaction" (
     message VARCHAR NOT NULL,
     sender INTEGER NOT NULL,
     recipient INTEGER NOT NULL,
+    is_taxable BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY ("sender") REFERENCES "public"."Account"(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
     FOREIGN KEY ("recipient") REFERENCES "public"."Account"(id) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
