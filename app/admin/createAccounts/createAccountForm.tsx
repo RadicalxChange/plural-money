@@ -92,7 +92,7 @@ export default function CreateAccountForm() {
             />
         </div>
         <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-400">Is this a member account?</label>
+            <label htmlFor="isMember" className="block text-sm font-medium text-gray-400">Is this a member account?</label>
             <input
                 type="checkbox"
                 id="isMember"
