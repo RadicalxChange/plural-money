@@ -4,7 +4,9 @@ import prisma from "@/db"
 import { Account } from "@/types/account";
 import { StagedTransaction, Transaction } from "@/types/transaction"
 import { createAccount } from "./createAccount";
-import { sendMail } from "./sendMail";
+import sendgrid from "@sendgrid/mail";
+
+process.env.SENDGRID_API_KEY && sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
 // TODO: handle errors
 export async function createTransaction(data: StagedTransaction): Promise<Transaction> {
@@ -74,8 +76,29 @@ export async function createTransaction(data: StagedTransaction): Promise<Transa
     }
   })
 
-  // send email to recipient
-  sendMail(recipient, data)
+  // send email to recipient using Twilio SendGrid's v3 Node.js Library
+  // https://github.com/sendgrid/sendgrid-nodejs
+  const msg: any = {
+    to: recipient.email,
+    from: process.env.EMAIL_SENDER,
+    templateId: process.env.MAIL_TEMPLATE_KEY,
+    subject: data.sender_name + " sent you " + data.amount + " ∈dges",
+    dynamic_template_data: { 
+      sender_name: data.sender_name,
+      amount: data.amount,
+      message: data.message,
+      is_member: recipient.is_member
+     },
+  }
+  console.log(msg)
+  sendgrid
+    .send(msg)
+    .then(() => {
+      console.log('Email sent')
+    })
+    .catch((error) => {
+      console.error(error)
+    })
 
   return createdTransaction
 }
