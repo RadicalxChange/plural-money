@@ -10,7 +10,7 @@ export default async function MobileNav() {
   const account: Account | null = user && await getAccount(user.email)
 
   return (
-    <div id="mobile-nav" className="lg:hidden hidden z-10 fixed w-full p-4 min-h-screen-minus-header bg-black">
+    <div id="mobile-nav" className="lg:hidden hidden z-10 fixed w-full p-4 min-h-screen-minus-header bg-gray-200 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:bg-black dark:from-inherit">
       <MobileNavButton text="Home" href="/" />
       {account ? (
         <MobileNavButton text="Participants" href="/participants" />

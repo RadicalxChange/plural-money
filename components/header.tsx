@@ -5,6 +5,7 @@ import { Account } from '@/types/account';
 import MenuButton from './menuButton';
 import { getAccount } from '@/lib/getAccount';
 import HeaderBalance from './headerProfile';
+import styles from "@/styles/header.module.css"
 
 export default async function Header() {
     
@@ -12,36 +13,36 @@ export default async function Header() {
     const account: Account | null = user && await getAccount(user.email)
     
     return (
-        <header className="z-10 w-full font-mono sticky top-0 p-4 bg-black bg-opacity-100 border-b border-gray-200">
+        <header className="z-10 w-full font-mono sticky top-0 p-4 bg-gray-200 dark:bg-black bg-opacity-100 border-b border-gray-200">
             <div className="w-full flex justify-between items-center">
                 <div className="lg:flex hidden">
-                    <Link href="/" className="px-3 py-2 rounded hover:bg-gray-700">Home</Link>
+                    <Link href="/" className={styles.headerLink}>Home</Link>
                     {account ? (
-                        <Link href="/participants" className="px-3 py-2 rounded hover:bg-gray-700">Participants</Link>
+                        <Link href="/participants" className={styles.headerLink}>Participants</Link>
                     ) : null}
                     {account ? (
-                        <Link href="/transactions" className="px-3 py-2 rounded hover:bg-gray-700">Transactions</Link>
+                        <Link href="/transactions" className={styles.headerLink}>Transactions</Link>
                     ) : null}
                     {account ? (
-                        <Link href="/send" className="px-3 py-2 rounded hover:bg-gray-700">Send</Link>
+                        <Link href="/send" className={styles.headerLink}>Send</Link>
                     ) : null}
                     {account ? (
-                        <Link href="/rules" className="px-3 py-2 rounded hover:bg-gray-700">Rules</Link>
+                        <Link href="/rules" className={styles.headerLink}>Rules</Link>
                     ) : null}
                     {account && account.is_admin ? (
-                        <Link href="/admin" className="px-3 py-2 rounded hover:bg-gray-700">Admin</Link>
+                        <Link href="/admin" className={styles.headerLink}>Admin</Link>
                     ) : null}
                 </div>
                 <MenuButton />
                 {user ? (
-                    <Link href="/profile" className="lg:px-3 rounded hover:bg-gray-700 lg:text-base text-xs">
+                    <Link href="/profile" className="lg:px-3 rounded hover:bg-gray-500 dark:hover:bg-gray-700 lg:text-base text-xs">
                         <p className="lg:font-semibold">{user.name}</p>
                         {account ? (
                             <HeaderBalance />
                         ) : null}
                     </Link>
                 ) : (
-                    <Link href="/signIn" className="lg:px-3 py-2 rounded hover:bg-gray-700 lg:text-base text-sm">Sign In</Link>
+                    <Link href="/signIn" className={styles.headerLink + " lg:text-base text-sm"}>Sign In</Link>
                 )}
             </div>
         </header>

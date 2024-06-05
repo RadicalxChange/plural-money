@@ -23,21 +23,19 @@ export default async function Transactions() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center border-b-2 border-white">
-      <div className="w-full px-4 pb-4 lg:px-24 pt-12">
-        <h1 className="text-left text-lg mb-12">Transactions</h1>
-        {user ? (
-          <ul className="w-full max-w-5xl font-mono lg:text-sm text-xs border-b border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit rounded-xl border bg-gray-200 lg:p-4">
-            {transactions.reverse().map((transaction, index) => {
-              return (
-                <li key={index} className={`px-4 py-2 my-2 flex justify-between items-center ${transaction.sender_id === user.account_id ? 'text-red-400' : ''} ${transaction.recipient_id === user.account_id ? 'text-green-400' : ''}`}>
-                    {getName(transaction.sender_id)} sent {transaction.amount} ∈dges to {getName(transaction.recipient_id)} for {transaction.message}
-                </li>
-              )
-            })}
-          </ul>
-        ) : null}
-      </div>
+    <main className="px-4 pb-4 lg:px-24 pt-12">
+      <h1 className="text-left text-lg mb-12">Transactions</h1>
+      {user ? (
+        <ul className="w-full max-w-5xl font-mono lg:text-sm text-xs border-b border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit rounded-xl border bg-gray-200 lg:p-4">
+          {transactions.reverse().map((transaction, index) => {
+            return (
+              <li key={index} className={`px-4 py-2 my-2 flex justify-between items-center ${transaction.sender_id === user.account_id ? 'text-red-400' : ''} ${transaction.recipient_id === user.account_id ? 'text-green-400' : ''}`}>
+                  {getName(transaction.sender_id)} sent {transaction.amount} ∈dges to {getName(transaction.recipient_id)} for {transaction.message}
+              </li>
+            )
+          })}
+        </ul>
+      ) : null}
     </main>
   );
 }

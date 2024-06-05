@@ -3,6 +3,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
 import { AccountFormState } from "@/types/account";
 import { createAccount } from '@/lib/createAccount';
+import styles from "@/styles/form.module.css"
 
 export default function CreateAccountForm() {
   // State hook to store form field values
@@ -50,7 +51,7 @@ export default function CreateAccountForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl" autoComplete="off">
         <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-400">Name</label>
+            <label htmlFor="name" className={styles.formLabel}>Name</label>
             <input
                 type="text"
                 id="name"
@@ -58,12 +59,12 @@ export default function CreateAccountForm() {
                 placeholder="Name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-3 py-2 lg:px-4 lg:py-3 font-mono text-sm border rounded-xl bg-gray-200 border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit"
+                className={styles.formTextInput}
                 required
             />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-400">Email</label>
+          <label htmlFor="email" className={styles.formLabel}>Email</label>
           <input
             type="email"
             id="email"
@@ -71,12 +72,12 @@ export default function CreateAccountForm() {
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-3 py-2 lg:px-4 lg:py-3 font-mono text-sm border rounded-xl bg-gray-200 border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit"
+            className={styles.formTextInput}
             required
           />
         </div>
         <div>
-            <label htmlFor="balance" className="block text-sm font-medium text-gray-400">∈dges</label>
+            <label htmlFor="balance" className={styles.formLabel}>∈dges</label>
             <input
                 type="number"
                 id="balance"
@@ -84,7 +85,7 @@ export default function CreateAccountForm() {
                 placeholder="0"
                 value={formData.balance}
                 onChange={handleChange}
-                className="w-full px-3 py-2 lg:px-4 lg:py-3 font-mono text-sm border rounded-xl bg-gray-200 border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit"
+                className={styles.formTextInput}
                 min="0" // Minimum amount
                 step="1" // Ensure whole numbers only
                 required
@@ -92,7 +93,7 @@ export default function CreateAccountForm() {
             />
         </div>
         <div>
-            <label htmlFor="isMember" className="block text-sm font-medium text-gray-400">Is this a member account?</label>
+            <label htmlFor="isMember" className={styles.formLabel}>Is this a member account?</label>
             <input
                 type="checkbox"
                 id="isMember"
@@ -105,7 +106,7 @@ export default function CreateAccountForm() {
         <div>
             <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-gray-400 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className={styles.formButton}
             >
                 Create Account
             </button>

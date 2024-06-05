@@ -8,6 +8,7 @@ import { createTransaction } from '@/lib/createTransaction';
 import { Claims } from '@auth0/nextjs-auth0';
 import { IBalanceContext, useBalanceContext } from '@/context/balanceContext';
 import { redirectHandler } from '@/lib/redirectHandler';
+import styles from "@/styles/form.module.css"
 
 export default function TransactionForm({
   user,
@@ -179,7 +180,7 @@ export default function TransactionForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl" autoComplete="off" ref={ref}>
         <div>
-            <label htmlFor="nameOrEmail" className="block text-sm font-medium text-gray-400">Send to</label>
+            <label htmlFor="nameOrEmail" className={styles.formLabel}>Send to</label>
             <input
                 type="text"
                 id="nameOrEmail"
@@ -187,7 +188,7 @@ export default function TransactionForm({
                 placeholder="Name or Email"
                 value={nameOrEmail}
                 onChange={handleChangeNameOrEmail}
-                className="w-full px-3 py-2 lg:px-4 lg:py-3 font-mono text-sm border rounded-xl bg-gray-200 border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit"
+                className={styles.formTextInput}
                 required
             />
             {suggestions.length > 0 && (
@@ -195,7 +196,7 @@ export default function TransactionForm({
                 {suggestions.map((suggestion) => (
                   <li
                     key={suggestion.id}
-                    className="px-4 py-2 hover:bg-gray-900 cursor-pointer"
+                    className="px-4 py-2 hover:bg-gray-500 dark:hover:bg-gray-700 cursor-pointer"
                     onClick={() => handleSuggestionClick(suggestion.name)}
                   >
                     {suggestion.name}
@@ -209,7 +210,7 @@ export default function TransactionForm({
               <button
                   type="button"
                   onClick={() => handleNext()}
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-gray-400 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className={styles.formButton}
               >
                   Next
               </button>
@@ -218,7 +219,7 @@ export default function TransactionForm({
           <>
           {recipient && typeof recipient === 'string' ? (
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-400">What&apos;s this person&apos;s name?</label>
+              <label htmlFor="name" className={styles.formLabel}>What&apos;s this person&apos;s name?</label>
               <input
                   type="text"
                   id="name"
@@ -226,13 +227,13 @@ export default function TransactionForm({
                   placeholder="Name"
                   value={formData.name}
                   onChange={handleChangeForm}
-                  className="w-full px-3 py-2 lg:px-4 lg:py-3 font-mono text-sm border rounded-xl bg-gray-200 border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit"
+                  className={styles.formTextInput}
                   required
               />
             </div>
           ) : null}
           <div>
-              <label htmlFor="amount" className="block text-sm font-medium text-gray-400">Amount of ∈dges</label>
+              <label htmlFor="amount" className={styles.formLabel}>Amount of ∈dges</label>
               <input
                   type="number"
                   id="amount"
@@ -240,27 +241,27 @@ export default function TransactionForm({
                   placeholder="0"
                   value={formData.amount}
                   onChange={handleChangeForm}
-                  className="w-full px-3 py-2 lg:px-4 lg:py-3 font-mono text-sm border rounded-xl bg-gray-200 border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit"
+                  className={styles.formTextInput}
                   step="1" // Ensure whole numbers only
                   required
               />
           </div>
           <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-400">What&apos;s it for?</label>
+              <label htmlFor="message" className={styles.formLabel}>What&apos;s it for?</label>
               <textarea
                   id="message"
                   name="message"
                   placeholder="Ex: maintaining the community garden"
                   value={formData.message}
                   onChange={handleChangeForm}
-                  className="w-full px-3 py-2 lg:px-4 lg:py-3 font-mono text-sm border rounded-xl bg-gray-200 border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit"
+                  className={styles.formTextInput}
                   rows={3}
                   required
               ></textarea>
           </div>
           {recipient && typeof recipient === 'object' && recipient.is_member && senderAccount?.is_member ? (
             <div>
-                <label htmlFor="isTaxable" className="block text-sm font-medium text-gray-400">Is this payment for a non-perishable good or work on an unlisted private / personally-owned project?</label>
+                <label htmlFor="isTaxable" className={styles.formLabel}>Is this payment for a non-perishable good or work on an unlisted private / personally-owned project?</label>
                 <input
                     type="checkbox"
                     id="isTaxable"
@@ -280,7 +281,7 @@ export default function TransactionForm({
           <div>
               <button
                   type="submit"
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-gray-400 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className={styles.formButton}
               >
                   Send
               </button>

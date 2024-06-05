@@ -22,7 +22,7 @@ export default function Home({
   };
 
   return (
-    <main className="flex flex-col items-center justify-center border-b-2 border-white">
+    <main className="flex flex-col items-center justify-center">
       <div className="flex flex-col items-center justify-center w-full min-h-screen-minus-header bg-gradient-to-b">
         <h1 className="text-lg m-6 text-center">Welcome to the Edge Esmeralda L∈dger</h1>
         <div className="space-x-4 mb-12">

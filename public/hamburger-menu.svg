@@ -1,12 +1,10 @@
 <!-- hamburger menu by Raphaël Buquet from <a href="https://thenounproject.com/browse/icons/term/hamburger-menu/" target="_blank" title="hamburger menu Icons">Noun Project</a> (CC BY 3.0) -->
 
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" clip-rule="evenodd" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="1" version="1.1" viewBox="0 0 32 32" xml:space="preserve" x="0px" y="0px">
-    <rect width="32" height="32" fill="none"/>
+    <rect width="32" height="32" fill="black"/>
     <g clip-rule="nonzero" fill-rule="nonzero" shape-rendering="auto">
         <path d="m3.5 8a1.0001 1.0001 0 1 0 0 2h25a1.0001 1.0001 0 1 0 0 -2z" fill="#ffffff" stroke="#ffffff" stroke-width="1"/>
         <path d="m3.5 15a1.0001 1.0001 0 1 0 0 2h25a1.0001 1.0001 0 1 0 0 -2z" fill="#ffffff" stroke="#ffffff" stroke-width="1"/>
         <path d="m3.5 22a1.0001 1.0001 0 1 0 0 2h25a1.0001 1.0001 0 1 0 0 -2z" fill="#ffffff" stroke="#ffffff" stroke-width="1"/>
     </g>
-    <text x="0" y="47" fill="#ffffff" font-size="5px" font-weight="bold" font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif">Created by Raphaël Buquet</text>
-    <text x="0" y="52" fill="#ffffff" font-size="5px" font-weight="bold" font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif">from the Noun Project</text>
 </svg>
