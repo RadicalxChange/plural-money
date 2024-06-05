@@ -1,3 +1,5 @@
+import { Account } from "./account";
+
 export interface Transaction {
     id: number;
     amount: number;
@@ -19,7 +21,8 @@ export interface StagedTransaction {
     amount: number;
     message: string;
     sender_id: number;
-    recipient_id: number | null;
+    sender_name: string;
+    recipient_account: Account | null;
     recipient_email: string;
     recipient_name: string;
     is_taxable: boolean;

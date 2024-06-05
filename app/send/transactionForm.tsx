@@ -134,7 +134,8 @@ export default function TransactionForm({
       amount: +formData.amount,
       message: formData.message,
       sender_id: user.account_id,
-      recipient_id: recipient && typeof recipient === 'object' ? recipient.id : null,
+      sender_name: senderAccount?.name || user.name,
+      recipient_account: recipient && typeof recipient === 'object' ? recipient : null,
       recipient_email: formData.email,
       recipient_name: formData.name,
       is_taxable: formData.isTaxable
