@@ -10,7 +10,7 @@ export default async function Participants() {
   const accounts: Account[] = await getAccounts()
 
   return (
-    <main className="px-4 pb-4 lg:px-24 pt-12">
+    <main className="px-4 pb-4 lg:px-24 pt-12 min-h-screen-minus-header">
       <h1 className="text-left text-lg mb-12">{`{ ∈dge holders }`}</h1>
       {user && user.account_is_member ? (
         <ul className="w-full max-w-5xl font-mono lg:text-sm text-xs border-b border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit rounded-xl border bg-gray-200 lg:p-4">

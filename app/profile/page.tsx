@@ -10,7 +10,7 @@ export default async function Profile() {
   const account: Account | null = user && await getAccount(user.email)
 
   return (
-    <main className="px-4 pb-4 lg:px-24 pt-12">
+    <main className="px-4 pb-4 lg:px-24 pt-12 min-h-screen-minus-header">
       <h1 className="text-left text-lg mb-12">Your Profile</h1>
       {user ? (
         <div className="space-y-4">

@@ -16,15 +16,13 @@ export default async function Send() {
   }
 
   return (
-    <main className="">
-      <div className="w-full px-4 pb-4 lg:px-24 pt-12">
-        <h1 className="text-left text-lg mb-12">Send ∈dges</h1>
-        {user && user.account_id ? (
-          <TransactionForm user={user} accounts={accounts} />
-        ) : (
-          <MembersOnly />
-        )}
-      </div>
+    <main className="px-4 pb-4 lg:px-24 pt-12 min-h-screen-minus-header">
+      <h1 className="text-left text-lg mb-12">Send ∈dges</h1>
+      {user && user.account_id ? (
+        <TransactionForm user={user} accounts={accounts} />
+      ) : (
+        <MembersOnly />
+      )}
     </main>
   );
 }
