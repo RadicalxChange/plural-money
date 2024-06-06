@@ -91,7 +91,8 @@ export default function TransactionForm({
 
   // Handler for user finalizing their recipient selection
   const handleNext = () => {
-    const recipientAccount: Account | undefined = accounts.find((account) => account.name === nameOrEmail || account.email === nameOrEmail)
+    const trimmedNameOrEmail: string = nameOrEmail.toLowerCase().trim()
+    const recipientAccount: Account | undefined = accounts.find((account) => account.name === nameOrEmail || account.email === trimmedNameOrEmail)
 
     // non-members can only send to members
     if (!user.account_is_member && !recipientAccount?.is_member) {
@@ -107,11 +108,11 @@ export default function TransactionForm({
       setNameOrEmail(recipientAccount.name)
    } else {
       const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if (regex.test(nameOrEmail)) {
-        setRecipient(nameOrEmail)
+      if (regex.test(trimmedNameOrEmail)) {
+        setRecipient(trimmedNameOrEmail)
         setFormData(prevFormData => ({
             ...prevFormData,
-            email: nameOrEmail,
+            email: trimmedNameOrEmail,
             isTaxable: true
         }));
       } else {
