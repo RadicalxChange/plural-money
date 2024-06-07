@@ -4,14 +4,15 @@
 
 import { IBalanceContext, useBalanceContext } from "@/context/balanceContext";
 
-export default function HeaderBalance() {
+export default function HeaderBalance({
+    initialBalance
+}: {
+    initialBalance: number
+}) {
+    
     const balanceContext: IBalanceContext | null = useBalanceContext();
     
-    if (balanceContext && balanceContext.balance) {
-        return (
-            <p>Balance: {balanceContext.balance} ∈</p>
-        );
-    } else {
-        return null
-    }
+    return (
+        <p>Balance: {balanceContext?.balance || initialBalance} ∈</p>
+    );
 }

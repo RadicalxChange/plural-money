@@ -4,7 +4,7 @@ import { Claims } from '@auth0/nextjs-auth0';
 import { Account } from '@/types/account';
 import MenuButton from './menuButton';
 import { getAccount } from '@/lib/getAccount';
-import HeaderBalance from './headerProfile';
+import HeaderBalance from './headerBalance';
 import styles from "@/styles/header.module.css"
 
 export default async function Header() {
@@ -38,7 +38,7 @@ export default async function Header() {
                     <Link href="/profile" className="lg:px-3 rounded hover:bg-gray-500 dark:hover:bg-gray-700 lg:text-base text-xs">
                         <p className="lg:font-semibold">{user.name}</p>
                         {account ? (
-                            <HeaderBalance />
+                            <HeaderBalance initialBalance={account.balance} />
                         ) : null}
                     </Link>
                 ) : (
