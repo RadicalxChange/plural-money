@@ -35,7 +35,9 @@ export default async function Transactions() {
             )
           })}
         </ul>
-      ) : null}
+      ) : (
+        <MembersOnly />
+      )}
     </main>
   );
 }
