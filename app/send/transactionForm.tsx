@@ -28,6 +28,8 @@ export default function TransactionForm({
   const [suggestions, setSuggestions] = useState<Account[]>([]);
   const [nameOrEmail, setNameOrEmail] = useState<string>('');
   const [recipient, setRecipient] = useState<Account | string | undefined>(undefined);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
   const balanceContext: IBalanceContext | null = useBalanceContext();
 
   const senderAccount: Account | undefined = accounts.find((account) => account.id === user.account_id)
@@ -93,10 +95,11 @@ export default function TransactionForm({
   const handleNext = () => {
     const trimmedNameOrEmail: string = nameOrEmail.toLowerCase().trim()
     const recipientAccount: Account | undefined = accounts.find((account) => account.name === nameOrEmail || account.email === trimmedNameOrEmail)
+    let newErrors = {...errors};
 
     // non-members can only send to members
     if (!user.account_is_member && !recipientAccount?.is_member) {
-      throw new Error("Please enter the name or email address of a registered community member.")
+      newErrors.nameOrEmail = "Please enter the name or email address of a registered community member.";
     } else if (recipientAccount) {
       setRecipient(recipientAccount);
       setFormData(prevFormData => ({
@@ -106,6 +109,7 @@ export default function TransactionForm({
           isTaxable: !recipientAccount.is_member
       }));
       setNameOrEmail(recipientAccount.name)
+      newErrors.nameOrEmail = ''; // Clear error
    } else {
       const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (regex.test(trimmedNameOrEmail)) {
@@ -115,10 +119,12 @@ export default function TransactionForm({
             email: trimmedNameOrEmail,
             isTaxable: true
         }));
+        newErrors.nameOrEmail = ''; // Clear error
       } else {
-        throw new Error("Please enter the name of a registered community member or a valid email address")
+        newErrors.nameOrEmail = "Please enter a valid name or email.";
       }
     }
+    setErrors(newErrors);
   };
 
   // Handler for closing the dropdown if user clicks outside of it
@@ -164,7 +170,7 @@ export default function TransactionForm({
       redirectHandler('/transactions')
     }).catch(error => {
       // Handle potential errors
-      console.error("Error creating account:", error);
+      console.error("Error creating transaction:", error);
     });
 
     // Clear the form fields
@@ -205,6 +211,9 @@ export default function TransactionForm({
                   </li>
                 ))}
               </ul>
+            )}
+            {errors.nameOrEmail && (
+                <p className="mt-2">{errors.nameOrEmail}</p>
             )}
         </div>
         {!recipient ? (
