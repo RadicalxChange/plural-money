@@ -9,7 +9,7 @@ import { BalanceProvider } from "@/context/balanceContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Edge Esmeralda L∈dger",
+  title: "∈dges",
   description: "A ledger for ∈dge holders",
   metadataBase: new URL(process.env.AUTH0_BASE_URL || "http://localhost:3000"),
   icons: {
