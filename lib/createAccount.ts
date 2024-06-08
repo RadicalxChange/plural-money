@@ -2,6 +2,7 @@
 
 import prisma from "@/db"
 import { Account, AccountFormState } from "@/types/account"
+import { sendMail } from "./sendMail"
 
 export async function createAccount(data: AccountFormState): Promise<Account> {
 
@@ -14,6 +15,9 @@ export async function createAccount(data: AccountFormState): Promise<Account> {
       is_admin: false,
     }
   })
+
+  // send email to recipient
+  sendMail(createdAccount)
 
   return createdAccount
 }
