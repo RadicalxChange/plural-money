@@ -20,15 +20,11 @@ export default async function Header() {
                     {account ? (
                         <Link href="/participants" className={styles.headerLink}>Participants</Link>
                     ) : null}
-                    {account ? (
-                        <Link href="/transactions" className={styles.headerLink}>Transactions</Link>
-                    ) : null}
+                    <Link href="/transactions" className={styles.headerLink}>Transactions</Link>
                     {account ? (
                         <Link href="/send" className={styles.headerLink}>Send</Link>
                     ) : null}
-                    {account ? (
-                        <Link href="/rules" className={styles.headerLink}>Rules</Link>
-                    ) : null}
+                    <Link href="/rules" className={styles.headerLink}>Rules</Link>
                     {account && account.is_admin ? (
                         <Link href="/admin" className={styles.headerLink}>Admin</Link>
                     ) : null}
