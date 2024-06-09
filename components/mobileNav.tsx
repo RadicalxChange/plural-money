@@ -15,15 +15,11 @@ export default async function MobileNav() {
       {account ? (
         <MobileNavButton text="Participants" href="/participants" />
       ) : null}
-      {account ? (
-        <MobileNavButton text="Transactions" href="/transactions" />
-      ) : null}
+      <MobileNavButton text="Transactions" href="/transactions" />
       {account && account.balance !== 0 ? (
         <MobileNavButton text="Send" href="/send" />
       ) : null}
-      {account ? (
-        <MobileNavButton text="Rules" href="/rules" />
-      ) : null}
+      <MobileNavButton text="Rules" href="/rules" />
       {account && account.is_admin ? (
         <MobileNavButton text="Admin" href="/admin" />
       ) : null}
