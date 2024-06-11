@@ -1,10 +1,10 @@
-import MembersOnly from "@/components/membersOnly";
 import { getAccounts } from "@/lib/getAccounts";
 import { getTransactions } from "@/lib/getTransactions";
 import { getUser } from "@/lib/getUser";
 import { Account } from "@/types/account";
 import { Transaction } from "@/types/transaction";
 import { Claims } from "@auth0/nextjs-auth0";
+import styles from "@/styles/contents.module.css";
 
 export default async function Transactions() {
     
@@ -30,7 +30,7 @@ export default async function Transactions() {
       {!account?.is_member ? (
         <p className="max-w-5xl text-left text-sm text-gray-300 mb-8">Transaction details are hidden if you&apos;re not a community member. If you&apos;d like to be registered as a community member, come to one of our onboarding sessions at Edge Esmeralda.</p>
       ) : null}
-      <ul className="w-full max-w-5xl font-mono lg:text-sm text-xs border-b border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit rounded-xl border bg-gray-200 lg:p-4">
+      <ul className={styles.contentBox}>
         {transactions.reverse().map((transaction, index) => {
           if (user && isViewable(transaction)) {
             return (
