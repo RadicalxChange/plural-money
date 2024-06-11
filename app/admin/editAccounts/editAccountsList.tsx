@@ -4,6 +4,7 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import { Account } from "@/types/account";
 import Image from 'next/image'
 import { updateAccount } from '@/lib/updateAccount';
+import styles from "@/styles/contents.module.css";
 
 export default function EditAccountsList({
     accounts
@@ -47,18 +48,33 @@ export default function EditAccountsList({
     const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         if (!editedAccount) throw new Error("no account is selected")
 
-        setEditedAccount({ ...editedAccount, balance: +event.target.value })
+        const value = event.target.type === 'checkbox' ? (event.target as HTMLInputElement).checked : +event.target.value;
+        const name = event.target.name;
+
+        setEditedAccount(prev => ({
+            ...prev!,
+            [name]: value
+        }));
     };
 
     return (
         <div>
             {editableAccounts ? (
-                <ul className="w-full max-w-5xl font-mono text-sm border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit rounded-xl border bg-gray-200 lg:p-4">
+                <ul className={styles.contentBox}>
                     {editableAccounts.map((account, index) => (
-                        <li key={index} className="px-4 py-2 my-2 flex justify-between items-center">
-                            <span className="flex-1 text-left">{account.name}</span>
+                        <li key={index} className="px-2 lg:px-4 py-2 my-2 flex justify-between items-center">
+                            <span className="flex-1 text-left mr-4 lg:mr-0">{account.name}</span>
                             {editedAccount && editedAccount.id === account.id ? (
                                 <form onSubmit={handleSave} className="flex items-center">
+                                    <label className="inline-flex items-center ml-4 mr-4">
+                                        <input
+                                          type="checkbox"
+                                          name="is_member"
+                                          checked={editedAccount.is_member}
+                                          onChange={handleChange}
+                                        />
+                                        <span className="ml-2">Member</span>
+                                    </label>
                                     <input
                                     type="number"
                                     id="balance"
@@ -75,8 +91,8 @@ export default function EditAccountsList({
                                 </form>
                             ) : (
                             <>
-                                <span className="mr-4">{account.balance} ∈</span>
-                                <button type="button" onClick={() => handleEdit(account)} className="text-white px-2 py-1 rounded">
+                                <span className="mr-2 lg:mr-4">{account.balance} ∈</span>
+                                <button type="button" onClick={() => handleEdit(account)} className="text-white lg:px-2 lg:py-1 rounded">
                                     <Image src="/edit-pencil.svg" alt="edit" width="32" height="32" />
                                 </button>
                             </>
