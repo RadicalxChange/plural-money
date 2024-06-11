@@ -30,8 +30,14 @@ export default function CreateAccountForm() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();  // Prevent the default form submission behavior
 
-    console.log("Creating a new account:", formData);
-    createAccount(formData).then(createdAccount => {
+    // ignore case and whitespace
+    const finalData = {
+      ...formData,
+      email: formData.email.toLowerCase().trim()
+    }
+
+    console.log("Creating a new account:", finalData);
+    createAccount(finalData).then(createdAccount => {
         // Handle the created account, e.g., update state, log, etc.
         console.log(createdAccount);
       }).catch(error => {
