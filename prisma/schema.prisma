@@ -12,11 +12,14 @@ model Account {
   name                                       String        @db.VarChar(255)
   email                                      String        @unique
   balance                                    Int
+  velocity                                   Int           @default(0)
   is_member                                  Boolean       @default(false)
   is_admin                                   Boolean       @default(false)
   is_bank                                    Boolean       @default(false)
   transactions_received                      Transaction[] @relation("transaction_recipient")
   transactions_sent                          Transaction[] @relation("transaction_sender")
+  created_at                                 DateTime  @default(now())
+  updated_at                                 DateTime  @default(now()) @updatedAt
 }
 
 model Transaction {
@@ -28,4 +31,6 @@ model Transaction {
   sender                                 Account @relation("transaction_sender", fields: [sender_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   recipient_id                           Int
   recipient                              Account @relation("transaction_recipient", fields: [recipient_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  created_at                             DateTime  @default(now())
+  updated_at                             DateTime  @default(now()) @updatedAt
 }

@@ -11,6 +11,7 @@ export async function createAccount(data: AccountFormState): Promise<Account> {
       name: data.name,
       email: data.email,
       balance: +data.balance,
+      velocity: 0,
       is_member: data.isMember,
       is_admin: false,
     }

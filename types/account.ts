@@ -5,6 +5,7 @@ export interface Account {
     name: string;
     email: string;
     balance: number;
+    velocity: number;
     is_member: boolean;
     is_admin: boolean;
     is_bank: boolean;
