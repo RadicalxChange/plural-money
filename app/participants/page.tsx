@@ -23,8 +23,8 @@ export default async function Participants() {
             return 0;
           }).map((account, index) => {
             return (
-              <li key={index} className={`px-4 py-2 my-2 flex justify-between items-center ${account.id === user.account_id ? 'text-blue-400' : ''}`}>
-                  {account.name} <span className="font-bold">{account.balance + " " + (account.is_member ? "∈" : "∉")}</span>
+              <li key={index} className={`px-4 py-2 my-2 grid grid-cols-3 items-center ${account.id === user.account_id ? 'text-blue-400' : ''}`} style={{ gridTemplateColumns: '2fr 2fr 1fr' }}>
+                  {account.name} <span className="font-bold text-center mx-2">Velocity: {account.velocity}</span> <span className="font-bold text-right">{account.balance + " " + (account.is_member ? "∈" : "∉")}</span>
               </li>
             )
           })}

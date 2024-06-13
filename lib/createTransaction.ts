@@ -3,7 +3,6 @@
 import prisma from "@/db"
 import { Account } from "@/types/account";
 import { StagedTransaction, Transaction } from "@/types/transaction"
-import { createAccount } from "./createAccount";
 import { sendMail } from "./sendMail";
 
 // TODO: handle errors
@@ -18,19 +17,24 @@ export async function createTransaction(data: StagedTransaction): Promise<Transa
       data: {
         balance: {
           increment: data.amount
+        },
+        velocity: {
+          increment: data.amount
         }
       },
     });
     recipient = data.recipient_account
   } else {
     // if recipient account does not exist, create new non-member account
-    const createdAccount: Account = await createAccount(
-      {
+    const createdAccount: Account = await prisma.account.create({
+      data: {
         name: data.recipient_name,
         email: data.recipient_email,
-        balance: data.amount.toString(),
-        isMember: false,
-      })
+        balance: data.amount,
+        velocity: data.amount,
+        is_member: false,
+      }
+    })
     recipient = createdAccount
   }
 
@@ -59,6 +63,9 @@ export async function createTransaction(data: StagedTransaction): Promise<Transa
     data: {
       balance: {
         decrement: data.amount * (data.is_taxable ? 2 : 1)
+      },
+      velocity: {
+        increment: data.amount
       }
     },
   });
