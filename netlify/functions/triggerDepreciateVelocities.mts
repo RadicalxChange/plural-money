@@ -1,7 +1,7 @@
 import { Handler, schedule } from '@netlify/functions';
 import axios from 'axios';
 
-const handler: Handler = async (event, context) => {
+const functionHandler: Handler = async (event, context) => {
   console.log("Running scheduled function for depreciating velocity");
 
   try {
@@ -33,4 +33,4 @@ const handler: Handler = async (event, context) => {
   }
 }
 
-exports.handler = schedule("@daily", handler);
+export const handler = schedule("@daily", functionHandler);
