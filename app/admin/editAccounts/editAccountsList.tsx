@@ -62,41 +62,50 @@ export default function EditAccountsList({
             {editableAccounts ? (
                 <ul className={styles.contentBox}>
                     {editableAccounts.map((account, index) => (
-                        <li key={index} className="px-2 lg:px-4 py-2 my-2 flex justify-between items-center">
-                            <span className="flex-1 text-left mr-4 lg:mr-0">{account.name}</span>
+                        <li key={index} className="px-2 lg:px-4 py-2 my-2">
+                            <div className="flex justify-between items-center">
+                                <span className="flex-1 text-left mr-4 lg:mr-0">{account.name}</span>
+                                {editedAccount && editedAccount.id === account.id ? null : (
+                                    <>
+                                    <span className="mr-2 lg:mr-4">{account.balance} ∈</span>
+                                    <button type="button" onClick={() => handleEdit(account)} className="text-white lg:px-2 lg:py-1 rounded">
+                                        <Image src="/edit-pencil.svg" alt="edit" width="32" height="32" />
+                                    </button>
+                                    </>
+                                )}
+                            </div>
                             {editedAccount && editedAccount.id === account.id ? (
-                                <form onSubmit={handleSave} className="flex items-center">
-                                    <label className="inline-flex items-center ml-4 mr-4">
-                                        <input
-                                          type="checkbox"
-                                          name="is_member"
-                                          checked={editedAccount.is_member}
-                                          onChange={handleChange}
-                                        />
-                                        <span className="ml-2">Member</span>
-                                    </label>
-                                    <input
-                                    type="number"
-                                    id="balance"
-                                    name="balance"
-                                    value={editedAccount.balance.toString()}
-                                    onChange={handleChange}
-                                    className="text-black font-bold w-20 text-right mr-2"
-                                    min="1" // Minimum amount
-                                    step="1" // Ensure whole numbers only
-                                    />
-                                    <span className="mr-4"> ∈</span>
-                                    <button type="submit" className="bg-green-500 text-white px-2 py-1 rounded mr-2">Save</button>
-                                    <button type="button" onClick={handleCancel} className="bg-red-500 text-white px-2 py-1 rounded">Cancel</button>
+                                <form onSubmit={handleSave} className="px-2 lg:px-4 pt-2 mt-2">
+                                    <div className="flex justify-between items-center mb-4">
+                                        <label className="inline-flex items-center">
+                                            <input
+                                                type="checkbox"
+                                                name="is_member"
+                                                checked={editedAccount.is_member}
+                                                onChange={handleChange}
+                                            />
+                                            <span className="ml-2">Member</span>
+                                        </label>
+                                        <label className="inline-flex items-center">
+                                            <input
+                                            type="number"
+                                            id="balance"
+                                            name="balance"
+                                            value={editedAccount.balance.toString()}
+                                            onChange={handleChange}
+                                            className="text-black font-bold w-20 text-right mr-2"
+                                            min="1" // Minimum amount
+                                            step="1" // Ensure whole numbers only
+                                            />
+                                            <span className="ml-2">∈</span>
+                                        </label>
+                                    </div>
+                                    <div className="text-center">
+                                        <button type="submit" className="bg-green-500 text-white px-2 py-1 rounded mr-2">Save</button>
+                                        <button type="button" onClick={handleCancel} className="bg-red-500 text-white px-2 py-1 rounded">Cancel</button>
+                                    </div>
                                 </form>
-                            ) : (
-                            <>
-                                <span className="mr-2 lg:mr-4">{account.balance} ∈</span>
-                                <button type="button" onClick={() => handleEdit(account)} className="text-white lg:px-2 lg:py-1 rounded">
-                                    <Image src="/edit-pencil.svg" alt="edit" width="32" height="32" />
-                                </button>
-                            </>
-                            )}
+                            ) : null}
                         </li>
                     ))}
                 </ul>
