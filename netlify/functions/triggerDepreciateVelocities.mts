@@ -1,5 +1,4 @@
-import { Handler } from '@netlify/functions';
-import type { Config } from "@netlify/functions"
+import { Handler, schedule } from '@netlify/functions';
 import axios from 'axios';
 
 const handler: Handler = async (event, context) => {
@@ -34,8 +33,4 @@ const handler: Handler = async (event, context) => {
   }
 }
 
-export { handler };
-
-export const config: Config = {
-    schedule: "@daily"
-}
+exports.handler = schedule("@daily", handler);
