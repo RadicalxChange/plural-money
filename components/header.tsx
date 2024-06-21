@@ -22,6 +22,9 @@ export default async function Header() {
                     ) : null}
                     <Link href="/transactions" className={styles.headerLink}>Transactions</Link>
                     {account ? (
+                        <Link href="/listings" className={styles.headerLink}>Listings</Link>
+                    ) : null}
+                    {account ? (
                         <Link href="/send" className={styles.headerLink}>Send</Link>
                     ) : null}
                     <Link href="/rules" className={styles.headerLink}>Rules</Link>
