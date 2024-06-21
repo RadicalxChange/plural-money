@@ -10,24 +10,66 @@ import { IBalanceContext, useBalanceContext } from '@/context/balanceContext';
 import { redirectHandler } from '@/lib/redirectHandler';
 import styles from "@/styles/form.module.css"
 
+interface TransactionFormProps {
+  user: Claims,
+  accounts: Account[],
+  searchParams: {
+    recipientName?: string,
+    recipientEmail?: string
+  }
+}
+
 export default function TransactionForm({
   user,
-  accounts
-}: {
-  user: Claims,
-  accounts: Account[]
-}) {
-  // State hook to store form field values
-  const [formData, setFormData] = useState<TransactionFormState>({
+  accounts,
+  searchParams
+}: TransactionFormProps) {
+
+  const isValidEmail = (email: string) => {
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(email)
+  }
+
+  // Initial state
+  var initFormData: TransactionFormState = {
     name: '',
     email: '',
     amount: '',
     message: '',
     isTaxable: false
-  });
+  }
+  var initNameOrEmail: string = ''
+  var initRecipient: Account | string | undefined = undefined
+
+  // Check for search parameters, autofill fields if present
+  if (searchParams.recipientEmail && searchParams.recipientName) {
+    const recipientAccount: Account | undefined = accounts.find((account) => account.email === searchParams.recipientEmail)
+    if (recipientAccount) {
+      initRecipient = recipientAccount
+      initNameOrEmail = recipientAccount.name
+      initFormData = {
+          ...initFormData,
+          name: recipientAccount.name,
+          email: recipientAccount.email,
+          isTaxable: !recipientAccount.is_member
+      };
+    } else if (isValidEmail(searchParams.recipientEmail)) {
+      initRecipient = searchParams.recipientEmail
+      initNameOrEmail = searchParams.recipientName
+      initFormData = {
+        ...initFormData,
+        name: searchParams.recipientName,
+        email: searchParams.recipientEmail,
+        isTaxable: true
+      }
+    }
+  }
+
+  // State hook to store form field values
+  const [formData, setFormData] = useState<TransactionFormState>(initFormData);
   const [suggestions, setSuggestions] = useState<Account[]>([]);
-  const [nameOrEmail, setNameOrEmail] = useState<string>('');
-  const [recipient, setRecipient] = useState<Account | string | undefined>(undefined);
+  const [nameOrEmail, setNameOrEmail] = useState<string>(initNameOrEmail);
+  const [recipient, setRecipient] = useState<Account | string | undefined>(initRecipient);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const balanceContext: IBalanceContext | null = useBalanceContext();
@@ -111,8 +153,7 @@ export default function TransactionForm({
       setNameOrEmail(recipientAccount.name)
       newErrors.nameOrEmail = ''; // Clear error
    } else {
-      const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if (regex.test(trimmedNameOrEmail)) {
+      if (isValidEmail(trimmedNameOrEmail)) {
         setRecipient(trimmedNameOrEmail)
         setFormData(prevFormData => ({
             ...prevFormData,
@@ -228,7 +269,7 @@ export default function TransactionForm({
           </div>
         ) : (
           <>
-          {recipient && typeof recipient === 'string' ? (
+          {recipient && typeof recipient === 'string' && !initRecipient ? (
             <div>
               <label htmlFor="name" className={styles.formLabel}>What&apos;s this person&apos;s name?</label>
               <input

@@ -12,8 +12,16 @@ type AuthState =
   | "authenticated"
   | "error";
 
-export default function SignIn() {
+interface SignInProps {
+  searchParams: {
+    redirectUri?: string
+  }
+}
+
+export default function SignIn({ searchParams }: SignInProps) {
   const [authState, setAuthState] = useState<AuthState>("logged out");
+  var redirectUri: string = searchParams.redirectUri ?? '/'
+  redirectUri = decodeURIComponent(redirectUri)
 
   useEffect(() => {
     (async () => {
@@ -46,7 +54,7 @@ export default function SignIn() {
 
           console.log("Authenticated successfully");
           setAuthState("authenticated");
-          redirectHandler('/');
+          redirectHandler(redirectUri);
         } else if (result.type === "popupBlocked") {
           console.log("The popup was blocked by your browser");
           setAuthState("error");
@@ -78,7 +86,7 @@ export default function SignIn() {
             authState === "auth-start" || authState === "authenticating"
           }
         >
-          <a href="/api/auth/login">Sign In With Google</a>
+          <a href={`/api/auth/login?returnTo=${redirectUri}`}>Sign In With Google</a>
         </button>
         <button
           onClick={auth}
