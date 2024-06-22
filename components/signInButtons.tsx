@@ -65,7 +65,7 @@ export default function SignIn({
         }
       }
     })();
-  }, [authState]);
+  }, [authState, redirectUri]);
 
   const auth = useCallback(() => {
     if (authState === "logged out" || authState === "error") {
