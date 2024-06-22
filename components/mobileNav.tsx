@@ -20,6 +20,7 @@ export default async function MobileNav() {
         <MobileNavButton text="Send" href="/send" />
       ) : null}
       <MobileNavButton text="Rules" href="/rules" />
+      <MobileNavButton text="Onboard" href="/onboard" />
       {account && account.is_admin ? (
         <MobileNavButton text="Admin" href="/admin" />
       ) : null}

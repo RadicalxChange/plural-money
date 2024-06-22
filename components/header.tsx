@@ -25,6 +25,7 @@ export default async function Header() {
                         <Link href="/send" className={styles.headerLink}>Send</Link>
                     ) : null}
                     <Link href="/rules" className={styles.headerLink}>Rules</Link>
+                    <Link href="/onboard" className={styles.headerLink}>Onboard</Link>
                     {account && account.is_admin ? (
                         <Link href="/admin" className={styles.headerLink}>Admin</Link>
                     ) : null}

@@ -20,7 +20,6 @@ export default function SignIn({
   disableGoogle?: boolean
  }) {
   const [authState, setAuthState] = useState<AuthState>("logged out");
-  console.log(redirectUri)
 
   useEffect(() => {
     (async () => {

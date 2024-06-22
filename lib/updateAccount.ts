@@ -15,6 +15,7 @@ export async function updateAccount(data: Account): Promise<Account> {
       balance: +data.balance,
       is_member: data.is_member,
       is_admin: data.is_admin,
+      pending_approval: data.pending_approval,
     }
   })
 

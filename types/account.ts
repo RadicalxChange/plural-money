@@ -9,6 +9,7 @@ export interface Account {
     is_member: boolean;
     is_admin: boolean;
     is_bank: boolean;
+    pending_approval: boolean;
     transactions_sent?: Transaction[];
     transactions_received?: Transaction[];
 }
@@ -19,6 +20,13 @@ export interface AccountFormState {
     balance: string;
     isMember: boolean;
 }
+
+export interface OnboardFormState {
+    name: string;
+    email: string;
+    agreedRules: boolean;
+    paidFee: boolean;
+  }
 
 // Type Guard for json that might be Account data
 export function isValidAccount(obj: any): obj is Account {
