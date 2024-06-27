@@ -16,6 +16,7 @@ model Account {
   is_member                                  Boolean       @default(false)
   is_admin                                   Boolean       @default(false)
   is_bank                                    Boolean       @default(false)
+  pending_approval                           Boolean       @default(false)
   transactions_received                      Transaction[] @relation("transaction_recipient")
   transactions_sent                          Transaction[] @relation("transaction_sender")
   listings_posted                            Listing[]     @relation("listing_author")

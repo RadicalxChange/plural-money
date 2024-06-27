@@ -25,9 +25,9 @@ export default function Home({
     <main className="flex flex-col items-center justify-center">
       <div className="flex flex-col items-center justify-center w-full min-h-screen-minus-header bg-gradient-to-b">
         <h1 className="text-lg m-6 text-center">Welcome to the Edge Esmeralda L∈dger</h1>
-        <div className="space-x-4 mb-12">
+        <div className="space-x-4 mb-4">
           {!user ? (
-            <button className="px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-gray-400 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <button className="px-7 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-gray-400 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               <Link href="/signIn">Sign In</Link>
             </button>
           ) : null}
@@ -35,6 +35,11 @@ export default function Home({
             Learn More
           </button>
         </div>
+        {!user?.account_is_member ? (
+          <button className="px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-gray-400 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <Link href="/onboard">Onboard</Link>
+          </button>
+        ) : null}
       </div>
       <div id="learn-more-section" className="w-full max-w-5xl min-h-screen-minus-header mb-12 p-4 font-mono text-sm bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit rounded-xl border bg-gray-200">
         <About />
