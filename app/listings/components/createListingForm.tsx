@@ -58,7 +58,7 @@ export default function CreateListingForm({
         <h2 className="mb-6">New Listing</h2>
       ) : (
         <button 
-          className="px-4 py-2 my-4 items-center border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-gray-400 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="px-4 py-2 mb-8 items-center border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-gray-400 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           onClick={toggleForm}
         >
           Create new listing

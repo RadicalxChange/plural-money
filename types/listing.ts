@@ -1,17 +1,21 @@
 export interface Listing {
     id: number;
     author_id: number;
-    type: "offer" | "request";
+    type: ListingType;
     message: string;
     reward: number;
-    status: "active" | "complete" | "delisted";
+    status: ListingStatus;
 }
 
 export interface StagedListing {
     id?: number;
     author_id: number;
-    type: "offer" | "request";
+    type: ListingType;
     message: string;
     reward: number;
-    status: "active" | "complete" | "delisted";
+    status: ListingStatus;
 }
+
+export type ListingType = "offer" | "request";
+
+export type ListingStatus = "active" | "complete" | "delisted";
