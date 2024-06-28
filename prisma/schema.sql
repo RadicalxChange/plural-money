@@ -24,3 +24,18 @@ CREATE TABLE "public"."Transaction" (
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TYPE "ListingType" AS ENUM ('offer', 'request');
+CREATE TYPE "ListingStatus" AS ENUM ('active', 'complete', 'delisted');
+
+CREATE TABLE "public"."Listing" (
+    id SERIAL PRIMARY KEY NOT NULL,
+    author INTEGER NOT NULL,
+    type "ListingType" NOT NULL,
+    message VARCHAR NOT NULL,
+    reward INTEGER NOT NULL,
+    status "ListingStatus" NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY ("author") REFERENCES "public"."Account"(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+)

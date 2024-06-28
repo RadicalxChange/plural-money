@@ -16,6 +16,9 @@ export default async function MobileNav() {
         <MobileNavButton text="Participants" href="/participants" />
       ) : null}
       <MobileNavButton text="Transactions" href="/transactions" />
+      {account ? (
+        <MobileNavButton text="Listings" href="/listings" />
+      ) : null}
       {account && account.balance !== 0 ? (
         <MobileNavButton text="Send" href="/send" />
       ) : null}

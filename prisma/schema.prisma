@@ -19,8 +19,9 @@ model Account {
   pending_approval                           Boolean       @default(false)
   transactions_received                      Transaction[] @relation("transaction_recipient")
   transactions_sent                          Transaction[] @relation("transaction_sender")
-  created_at                                 DateTime  @default(now())
-  updated_at                                 DateTime  @default(now()) @updatedAt
+  listings_posted                            Listing[]     @relation("listing_author")
+  created_at                                 DateTime      @default(now())
+  updated_at                                 DateTime      @default(now()) @updatedAt
 }
 
 model Transaction {
@@ -34,4 +35,27 @@ model Transaction {
   recipient                              Account @relation("transaction_recipient", fields: [recipient_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   created_at                             DateTime  @default(now())
   updated_at                             DateTime  @default(now()) @updatedAt
+}
+
+model Listing {
+  id                                     Int     @id @default(autoincrement())
+  author_id                              Int
+  author                                 Account @relation("listing_author", fields: [author_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  type                                   ListingType
+  message                                String  @db.VarChar
+  reward                                 Int
+  status                                 ListingStatus
+  created_at                             DateTime  @default(now())
+  updated_at                             DateTime  @default(now()) @updatedAt
+}
+
+enum ListingType {
+  offer
+  request
+}
+
+enum ListingStatus {
+  active
+  complete
+  delisted
 }
