@@ -77,15 +77,26 @@ export default function EditAccountsList({
                             {editedAccount && editedAccount.id === account.id ? (
                                 <form onSubmit={handleSave} className="px-2 lg:px-4 pt-2 mt-2">
                                     <div className="flex justify-between items-center mb-4">
-                                        <label className="inline-flex items-center">
-                                            <input
-                                                type="checkbox"
-                                                name="is_member"
-                                                checked={editedAccount.is_member}
-                                                onChange={handleChange}
-                                            />
-                                            <span className="ml-2">Member</span>
-                                        </label>
+                                        <div>
+                                            <label className="inline-flex items-center mr-4">
+                                                <input
+                                                    type="checkbox"
+                                                    name="is_member"
+                                                    checked={editedAccount.is_member}
+                                                    onChange={handleChange}
+                                                />
+                                                <span className="ml-2">Member</span>
+                                            </label>
+                                            <label className="inline-flex items-center mr-4">
+                                                <input
+                                                    type="checkbox"
+                                                    name="pending_approval"
+                                                    checked={editedAccount.pending_approval}
+                                                    onChange={handleChange}
+                                                />
+                                                <span className="ml-2">Pending</span>
+                                            </label>
+                                        </div>
                                         <label className="inline-flex items-center">
                                             <input
                                             type="number"
