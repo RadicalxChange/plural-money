@@ -3,6 +3,7 @@ export interface Listing {
     author_id: number;
     type: ListingType;
     message: string;
+    contact: string;
     reward: number;
     status: ListingStatus;
 }
@@ -12,6 +13,7 @@ export interface StagedListing {
     author_id: number;
     type: ListingType;
     message: string;
+    contact: string;
     reward: number;
     status: ListingStatus;
 }

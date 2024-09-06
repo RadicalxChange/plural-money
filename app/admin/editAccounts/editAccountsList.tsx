@@ -105,7 +105,7 @@ export default function EditAccountsList({
                                             value={editedAccount.balance.toString()}
                                             onChange={handleChange}
                                             className="text-black font-bold w-20 text-right mr-2"
-                                            min="1" // Minimum amount
+                                            min="0" // Minimum amount
                                             step="1" // Ensure whole numbers only
                                             />
                                             <span className="ml-2">∈</span>

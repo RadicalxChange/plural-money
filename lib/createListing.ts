@@ -12,6 +12,7 @@ export async function createListing(data: StagedListing): Promise<Listing> {
       type: data.type,
       message: data.message,
       reward: data.reward,
+      contact: data.contact,
       status: data.status,
     }
   })

@@ -12,6 +12,7 @@ export async function updateListing(data: Listing): Promise<Listing> {
     data: {
       message: data.message,
       reward: +data.reward,
+      contact: data.contact,
       status: data.status,
     }
   })

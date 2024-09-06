@@ -15,7 +15,7 @@ export default function CreateListingForm({
 }) {
 
   const [showForm, setShowForm] = useState(false);
-  const [formInput, setFormInput] = useState({message: '', type: 'offer', reward: 0});
+  const [formInput, setFormInput] = useState({message: '', type: 'offer', reward: 0, contact: ''});
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -30,6 +30,7 @@ export default function CreateListingForm({
       message: formInput.message,
       type: formInput.type as "offer" | "request",
       reward: Number(formInput.reward),
+      contact: formInput.contact,
       status: "active",
     };
 
@@ -48,7 +49,7 @@ export default function CreateListingForm({
   };
 
   const toggleForm = () => {
-    setFormInput({message: '', type: 'offer', reward: 0})
+    setFormInput({message: '', type: 'offer', reward: 0, contact: ''})
     setShowForm(!showForm)
   };
 
@@ -80,6 +81,7 @@ export default function CreateListingForm({
             onChange={handleFormChange}
             placeholder="Message"
             className={formStyles.formTextInput}
+            required
           />
           <label htmlFor="reward" className={formStyles.formLabel}>Price in ∈dges</label>
           <input
@@ -92,6 +94,16 @@ export default function CreateListingForm({
             className={formStyles.formTextInput}
             step="1" // Ensure whole numbers only
             required
+          />
+          <label htmlFor="contact" className={formStyles.formLabel}>Telegram handle (not required)</label>
+          <input
+            type="text"
+            id="contact"
+            name="contact"
+            value={formInput.contact}
+            onChange={handleFormChange}
+            placeholder="Telegram handle"
+            className={formStyles.formTextInput}
           />
           <button type="submit" className={formStyles.formButton}>Submit</button>
           <button type="button" onClick={toggleForm} className={`${formStyles.formButton} ${formStyles.cancelButton}`}>Cancel</button>

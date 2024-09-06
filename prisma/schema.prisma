@@ -44,6 +44,7 @@ model Listing {
   type                                   ListingType
   message                                String  @db.VarChar
   reward                                 Int
+  contact                                String  @db.VarChar @default("")
   status                                 ListingStatus
   created_at                             DateTime  @default(now())
   updated_at                             DateTime  @default(now()) @updatedAt

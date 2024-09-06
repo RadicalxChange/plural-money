@@ -34,6 +34,7 @@ CREATE TABLE "public"."Listing" (
     type "ListingType" NOT NULL,
     message VARCHAR NOT NULL,
     reward INTEGER NOT NULL,
+    contact VARCHAR NOT NULL DEFAULT "",
     status "ListingStatus" NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,

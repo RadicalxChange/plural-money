@@ -103,6 +103,16 @@ export default function Listings({
                   step="1" // Ensure whole numbers only
                   required
                 />
+                <label htmlFor="contact" className={formStyles.formLabel}>Telegram handle (not required)</label>
+                <input
+                  type="text"
+                  id="contact"
+                  name="contact"
+                  value={editedListing.contact}
+                  onChange={handleChange}
+                  placeholder="Telegram handle"
+                  className={formStyles.formTextInput}
+                />
                 <label htmlFor="status" className={formStyles.formLabel}>Listing Status</label>
                 <select id="status" name="status" value={editedListing.status} onChange={handleChange} className={formStyles.formTextInput}>
                   <option value="active">Active</option>
@@ -122,6 +132,7 @@ export default function Listings({
               <div className="flex-1 mr-4 lg:mr-0">
                 <span>{listing.message}</span>
                 <p className="mt-2 text-xs">{listing.type} posted by {getName(listing.author_id)}</p>
+                {listing.contact && <p className="mt-2 text-xs">Telegram: {listing.contact}</p>}
               </div>
               <span className="mr-2 lg:mr-4">{listing.reward} ∈</span>
               {listing.author_id === user.account_id && (
