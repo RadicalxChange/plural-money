@@ -34,9 +34,9 @@ CREATE TABLE "public"."Listing" (
     type "ListingType" NOT NULL,
     message VARCHAR NOT NULL,
     reward INTEGER NOT NULL,
-    contact VARCHAR NOT NULL DEFAULT "",
+    contact VARCHAR,
     status "ListingStatus" NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY ("author") REFERENCES "public"."Account"(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-)
+    FOREIGN KEY ("author") REFERENCES "public"."Account"(id) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
