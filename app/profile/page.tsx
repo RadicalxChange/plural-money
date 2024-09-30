@@ -15,7 +15,7 @@ export default async function Profile() {
       {user ? (
         <div className="space-y-4">
           <div className="w-full max-w-5xl font-mono space-y-2 lg:text-sm text-xs border-b border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit rounded-xl border bg-gray-200 lg:p-4">
-            <p className="px-4 py-1 my-1 flex justify-between items-center">{user.name}</p>
+            <p className="px-4 py-1 my-1 flex justify-between items-center">{account ? account.name : user.name}</p>
             <p className="px-4 py-1 my-1 flex justify-between items-center">{user.email}</p>
             {account ? (
               <div className="space-y-2">

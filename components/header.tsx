@@ -36,7 +36,7 @@ export default async function Header() {
                 <MenuButton />
                 {user ? (
                     <Link href="/profile" className="lg:px-3 rounded hover:bg-gray-500 dark:hover:bg-gray-700 lg:text-base text-xs">
-                        <p className="lg:font-semibold">{user.name}</p>
+                        <p className="lg:font-semibold">{account ? account.name : user.name}</p>
                         {account ? (
                             <HeaderBalance initialBalance={account.balance} />
                         ) : null}

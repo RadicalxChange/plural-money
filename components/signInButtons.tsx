@@ -83,7 +83,7 @@ export default function SignIn({
             authState === "auth-start" || authState === "authenticating"
           }
         >
-          <a href={redirectUri ? `/api/auth/login?returnTo=${encodeURIComponent(redirectUri)}` : "/api/auth/login"}>Sign In With Google</a>
+          <a href={redirectUri ? `/api/auth/login?returnTo=${encodeURIComponent(redirectUri)}` : "/api/auth/login"}>Sign In</a>
         </button>
       ): null}
       <button

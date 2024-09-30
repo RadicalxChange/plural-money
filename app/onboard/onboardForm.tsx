@@ -14,9 +14,12 @@ export default function OnboardForm({
   user: Claims,
   account: Account | null
 }) {
+
+  const nameOrUsername: string = user.name === user.email && user.username ? user.username : user.name
+
   // State hook to store form field values
   const [formData, setFormData] = useState<OnboardFormState>({
-    name: account?.name || user.name,
+    name: account?.name || nameOrUsername,
     email: account?.email || user.email,
     agreedRules: false,
     paidFee: false
