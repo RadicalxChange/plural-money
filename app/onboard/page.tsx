@@ -1,10 +1,10 @@
 import { Claims } from "@auth0/nextjs-auth0";
 import OnboardForm from "./onboardForm";
 import { getUser } from "@/lib/getUser";
-import SignInButtons from "@/components/signInButtons";
 import SignOutButton from "@/components/signOutButton";
 import { Account } from "@/types/account";
 import { getAccount } from "@/lib/getAccount";
+import Link from "next/link";
 
 export default async function SignUp() {
     
@@ -32,8 +32,10 @@ export default async function SignUp() {
             )
           ) : (
             <>
-            <p className="text-sm mb-6">Get onboarded to get the most out of your ∈dges. Sign in with your Zupass ticket to get started.</p>
-            <SignInButtons redirectUri="/onboard" disableGoogle />
+            <p className="text-sm mb-6">Get onboarded to get the most out of your ∈dges. Sign in or sign up to get started, then come back here to fill out the onboarding form.</p>
+            <button className="px-7 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-gray-400 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <Link href="/signIn">Sign In</Link>
+            </button>
             </>
           )
         )
