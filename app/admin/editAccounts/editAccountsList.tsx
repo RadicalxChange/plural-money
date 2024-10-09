@@ -96,6 +96,15 @@ export default function EditAccountsList({
                                                 />
                                                 <span className="ml-2">Pending</span>
                                             </label>
+                                            <label className="inline-flex items-center mr-4">
+                                                <input
+                                                    type="checkbox"
+                                                    name="is_admin"
+                                                    checked={editedAccount.is_admin}
+                                                    onChange={handleChange}
+                                                />
+                                                <span className="ml-2">Admin</span>
+                                            </label>
                                         </div>
                                         <label className="inline-flex items-center">
                                             <input

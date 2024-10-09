@@ -19,6 +19,7 @@ export interface AccountFormState {
     email: string;
     balance: string;
     isMember: boolean;
+    isAdmin: boolean;
 }
 
 export interface OnboardFormState {

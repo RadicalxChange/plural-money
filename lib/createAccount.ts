@@ -13,7 +13,7 @@ export async function createAccount(data: AccountFormState): Promise<Account> {
       balance: +data.balance,
       velocity: 0,
       is_member: data.isMember,
-      is_admin: false,
+      is_admin: data.isAdmin,
     }
   })
 

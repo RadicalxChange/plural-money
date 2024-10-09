@@ -11,7 +11,8 @@ export default function CreateAccountForm() {
     name: '',
     email: '',
     balance: '',
-    isMember: true
+    isMember: true,
+    isAdmin: false
   });
 
   // Handler for changes in form inputs
@@ -50,7 +51,8 @@ export default function CreateAccountForm() {
         name: '',
         email: '',
         balance: '',
-        isMember: true
+        isMember: true,
+        isAdmin: false
     });
   };
 
@@ -105,6 +107,17 @@ export default function CreateAccountForm() {
                 id="isMember"
                 name="isMember"
                 checked={formData.isMember}
+                onChange={handleChange}
+                className="mt-1"
+            />
+        </div>
+        <div>
+            <label htmlFor="isAdmin" className={styles.formLabel}>Is this an admin?</label>
+            <input
+                type="checkbox"
+                id="isAdmin"
+                name="isAdmin"
+                checked={formData.isAdmin}
                 onChange={handleChange}
                 className="mt-1"
             />
